@@ -9,6 +9,8 @@ s .gitignore file should be placed at the root of your Unity project directory
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+# tmp (find corresponding aeests from the beginner template)
+/Assets/Art/Texture/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
