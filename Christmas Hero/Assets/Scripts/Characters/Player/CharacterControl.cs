@@ -193,8 +193,8 @@ namespace CreatorKitCodeInternal
             {
                 if (m_CurrentTargetCharacterData.Stats.CurrentHealth == 0)
                     m_CurrentTargetCharacterData = null;
-                else
-                    CheckAttack();
+                // else
+                //     CheckAttack();
             }
 
             float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
