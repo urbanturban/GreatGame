@@ -7,24 +7,31 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
-namespace CreatorKitCodeInternal {
-    public class CharacterControl : MonoBehaviour, 
+namespace CreatorKitCodeInternal
+{
+    public class CharacterControl : MonoBehaviour,
         AnimationControllerDispatcher.IAttackFrameReceiver,
         AnimationControllerDispatcher.IFootstepFrameReceiver
     {
         public static CharacterControl Instance { get; protected set; }
-    
         public float Speed = 10.0f;
-
         public CharacterData Data => m_CharacterData;
         public CharacterData CurrentTarget => m_CurrentTargetCharacterData;
 
-        public Transform WeaponLocator;
-    
+        private Rigidbody weaponRb;
+        private Vector3 weaponLocPos;
+
+        private WeaponScript weaponScript;
+
+        [Header("Public References")]
+        public Transform weapon;
+        public Transform hand;
+
         [Header("Audio")]
         public AudioClip[] SpurSoundClips;
-    
+
         Vector3 m_LastRaycastResult;
         Animator m_Animator;
         NavMeshAgent m_Agent;
@@ -60,7 +67,7 @@ namespace CreatorKitCodeInternal {
         bool m_ClearPostAttack = false;
 
         SpawnPoint m_CurrentSpawn = null;
-    
+
         enum State
         {
             DEFAULT,
@@ -81,12 +88,12 @@ namespace CreatorKitCodeInternal {
         {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
-        
+
             m_CalculatedPath = new NavMeshPath();
-        
+
             m_Agent = GetComponent<NavMeshAgent>();
             m_Animator = GetComponentInChildren<Animator>();
-        
+
             m_Agent.speed = Speed;
             m_Agent.angularSpeed = 360.0f;
 
@@ -104,22 +111,22 @@ namespace CreatorKitCodeInternal {
             {
                 if (item.Slot == (EquipmentItem.EquipmentSlot)666)
                 {
-                    var obj = Instantiate(item.WorldObjectPrefab, WeaponLocator, false);
+                    var obj = Instantiate(item.WorldObjectPrefab, weapon, false);
                     Helpers.RecursiveLayerChange(obj.transform, LayerMask.NameToLayer("PlayerEquipment"));
                 }
             };
-        
+
             m_CharacterData.Equipment.OnUnequip += item =>
             {
                 if (item.Slot == (EquipmentItem.EquipmentSlot)666)
                 {
-                    foreach(Transform t in WeaponLocator)
+                    foreach (Transform t in weapon)
                         Destroy(t.gameObject);
                 }
             };
-            
+
             m_CharacterData.Init();
-        
+
             m_InteractableLayer = 1 << LayerMask.NameToLayer("Interactable");
             m_LevelLayer = 1 << LayerMask.NameToLayer("Level");
             m_TargetLayer = 1 << LayerMask.NameToLayer("Target");
@@ -127,19 +134,23 @@ namespace CreatorKitCodeInternal {
             m_CurrentState = State.DEFAULT;
 
             m_CharacterAudio = GetComponent<CharacterAudio>();
-        
+
             m_CharacterData.OnDamage += () =>
             {
                 m_Animator.SetTrigger(m_HitParamID);
                 m_CharacterAudio.Hit(transform.position);
             };
+
+            weaponRb = weapon.GetComponent<Rigidbody>();
+            weaponLocPos = weapon.localPosition;
+            weaponScript = weapon.GetComponent<WeaponScript>();
         }
 
         // Update is called once per frame
         void Update()
         {
             Vector3 pos = transform.position;
-        
+
             if (m_IsKO)
             {
                 m_KOTimer += Time.deltaTime;
@@ -163,16 +174,16 @@ namespace CreatorKitCodeInternal {
                 m_Agent.ResetPath();
                 m_IsKO = true;
                 m_KOTimer = 0.0f;
-            
+
                 Data.Death();
-            
+
                 m_CharacterAudio.Death(pos);
-            
+
                 return;
             }
-        
+
             Ray screenRay = CameraController.Instance.GameplayCamera.ScreenPointToRay(Input.mousePosition);
-        
+
             if (m_TargetInteractable != null)
             {
                 CheckInteractableRange();
@@ -185,16 +196,16 @@ namespace CreatorKitCodeInternal {
                 else
                     CheckAttack();
             }
-        
+
             float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
             if (!Mathf.Approximately(mouseWheel, 0.0f))
             {
                 Vector3 view = m_MainCamera.ScreenToViewportPoint(Input.mousePosition);
-                if(view.x > 0f && view.x < 1f && view.y > 0f && view.y < 1f)
+                if (view.x > 0f && view.x < 1f && view.y > 0f && view.y < 1f)
                     CameraController.Instance.Zoom(-mouseWheel * Time.deltaTime * 20.0f);
             }
-        
-            if(Input.GetMouseButtonDown(0))
+
+            if (Input.GetMouseButtonDown(0))
             { //if we click the mouse button, we clear any previously et targets
 
                 if (m_CurrentState != State.ATTACKING)
@@ -213,7 +224,7 @@ namespace CreatorKitCodeInternal {
             {
                 //Raycast to find object currently under the mouse cursor
                 ObjectsRaycasts(screenRay);
-            
+
                 if (Input.GetMouseButton(0))
                 {
                     if (m_TargetInteractable == null && m_CurrentTargetCharacterData == null)
@@ -237,19 +248,44 @@ namespace CreatorKitCodeInternal {
                         }
                     }
                 }
+
+                if (Input.GetMouseButtonDown(1))
+                {
+                    if (m_TargetInteractable == null && m_CurrentTargetCharacterData == null)
+                    {
+                        InteractableObject obj = m_Highlighted as InteractableObject;
+                        if (obj)
+                        {
+                            ThrowSnowball(obj.transform);
+                        }
+                        else
+                        {
+                            CharacterData data = m_Highlighted as CharacterData;
+                            if (data != null)
+                            {
+                                ThrowSnowball(data.transform);
+                            }
+                        }
+                    }
+                }
             }
 
             m_Animator.SetFloat(m_SpeedParamID, m_Agent.velocity.magnitude / m_Agent.speed);
-        
+
             //Keyboard shortcuts
-            if(Input.GetKeyUp(KeyCode.I))
+            if (Input.GetKeyUp(KeyCode.I))
                 UISystem.Instance.ToggleInventory();
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            }
         }
 
         void GoToRespawn()
         {
             m_Animator.ResetTrigger(m_HitParamID);
-        
+
             m_Agent.Warp(m_CurrentSpawn.transform.position);
             m_Agent.isStopped = true;
             m_Agent.ResetPath();
@@ -259,9 +295,9 @@ namespace CreatorKitCodeInternal {
             m_TargetInteractable = null;
 
             m_CurrentState = State.DEFAULT;
-        
+
             m_Animator.SetTrigger(m_RespawnParamID);
-        
+
             m_CharacterData.Stats.ChangeHealth(m_CharacterData.Stats.stats.health);
         }
 
@@ -307,20 +343,20 @@ namespace CreatorKitCodeInternal {
 
         void SwitchHighlightedObject(HighlightableObject obj)
         {
-            if(m_Highlighted != null) m_Highlighted.Dehighlight();
+            if (m_Highlighted != null) m_Highlighted.Dehighlight();
 
             m_Highlighted = obj;
-            if(m_Highlighted != null) m_Highlighted.Highlight();
+            if (m_Highlighted != null) m_Highlighted.Highlight();
         }
 
         void MoveCheck(Ray screenRay)
-        {     
-            if ( m_CalculatedPath.status == NavMeshPathStatus.PathComplete)
+        {
+            if (m_CalculatedPath.status == NavMeshPathStatus.PathComplete)
             {
                 m_Agent.SetPath(m_CalculatedPath);
                 m_CalculatedPath.ClearCorners();
             }
-        
+
             if (Physics.RaycastNonAlloc(screenRay, m_RaycastHitCache, 1000.0f, m_LevelLayer) > 0)
             {
                 Vector3 point = m_RaycastHitCache[0].point;
@@ -341,12 +377,12 @@ namespace CreatorKitCodeInternal {
 
         void CheckInteractableRange()
         {
-            if(m_CurrentState == State.ATTACKING)
+            if (m_CurrentState == State.ATTACKING)
                 return;
-        
+
             Vector3 distance = m_TargetCollider.ClosestPointOnBounds(transform.position) - transform.position;
-        
-            
+
+
             if (distance.sqrMagnitude < 1.5f * 1.5f)
             {
                 StopAgent();
@@ -363,9 +399,9 @@ namespace CreatorKitCodeInternal {
 
         void CheckAttack()
         {
-            if(m_CurrentState == State.ATTACKING)
+            if (m_CurrentState == State.ATTACKING)
                 return;
-               
+
             if (m_CharacterData.CanAttackReach(m_CurrentTargetCharacterData))
             {
                 StopAgent();
@@ -377,7 +413,6 @@ namespace CreatorKitCodeInternal {
                     forward.y = 0;
                     forward.Normalize();
 
-                    
                     transform.forward = forward;
                     if (m_CharacterData.CanAttackTarget(m_CurrentTargetCharacterData))
                     {
@@ -412,7 +447,7 @@ namespace CreatorKitCodeInternal {
                 SFXManager.PlaySound(m_CharacterAudio.UseType, new SFXManager.PlayData() { Clip = m_CharacterData.Equipment.Weapon.GetHitSound(), PitchMin = 0.8f, PitchMax = 1.2f, Position = attackPos });
             }
 
-            if(m_ClearPostAttack)
+            if (m_ClearPostAttack)
             {
                 m_ClearPostAttack = false;
                 m_CurrentTargetCharacterData = null;
@@ -424,7 +459,7 @@ namespace CreatorKitCodeInternal {
 
         public void SetNewRespawn(SpawnPoint point)
         {
-            if(m_CurrentSpawn != null)
+            if (m_CurrentSpawn != null)
                 m_CurrentSpawn.Deactivated();
 
             m_CurrentSpawn = point;
@@ -444,19 +479,44 @@ namespace CreatorKitCodeInternal {
         public void FootstepFrame()
         {
             Vector3 pos = transform.position;
-        
+
             m_CharacterAudio.Step(pos);
-        
+
             SFXManager.PlaySound(SFXManager.Use.Player, new SFXManager.PlayData()
             {
-                Clip = SpurSoundClips[Random.Range(0, SpurSoundClips.Length)], 
+                Clip = SpurSoundClips[Random.Range(0, SpurSoundClips.Length)],
                 Position = pos,
                 PitchMin = 0.8f,
                 PitchMax = 1.2f,
                 Volume = 0.3f
             });
-        
-            VFXManager.PlayVFX(VFXType.StepPuff, pos);  
+
+            VFXManager.PlayVFX(VFXType.StepPuff, pos);
+        }
+
+        public void ThrowSnowball(Transform targetTransform)
+        {
+            // we make only one snowball exist in the scene at one time
+            if (WeaponScript.snowball == null)
+            {
+                Transform snowball = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation);
+                Physics.IgnoreCollision(GetComponent<Collider>(), snowball.gameObject.GetComponent<Collider>(), true);
+                WeaponScript.snowball = snowball;
+                snowball.parent = null;
+                // snowball.localPosition = weapon.localPosition;
+
+                Vector3 forward = (targetTransform.position - snowball.transform.position);
+                forward.Normalize();
+                snowball.transform.forward = forward;
+
+                Rigidbody snowballRb = snowball.GetComponent<Rigidbody>();
+                snowballRb.Sleep();
+                snowballRb.isKinematic = false;
+                snowballRb.freezeRotation = true;
+                snowballRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+                // snowball.transform.position += transform.up;
+                snowballRb.AddForce(snowball.transform.forward * 10, ForceMode.Impulse);
+            }
         }
     }
 }
