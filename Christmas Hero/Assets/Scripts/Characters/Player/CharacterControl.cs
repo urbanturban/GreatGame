@@ -14,6 +14,7 @@ namespace CreatorKitCodeInternal
     public class CharacterControl : MonoBehaviour,
         AnimationControllerDispatcher.IAttackFrameReceiver,
         AnimationControllerDispatcher.IFootstepFrameReceiver
+        
     {
         public static CharacterControl Instance { get; protected set; }
         public float Speed = 10.0f;
@@ -83,9 +84,11 @@ namespace CreatorKitCodeInternal
             m_MainCamera = Camera.main;
         }
 
+
         // Start is called before the first frame update
         void Start()
         {
+
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
 
@@ -499,6 +502,7 @@ namespace CreatorKitCodeInternal
             // we make only one snowball exist in the scene at one time
             if (WeaponScript.snowball == null)
             {
+                m_Animator.SetTrigger("Throw"); //Trigger animation for Throw in SantaController
                 Transform snowball = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation);
                 Physics.IgnoreCollision(GetComponent<Collider>(), snowball.gameObject.GetComponent<Collider>(), true);
                 WeaponScript.snowball = snowball;
