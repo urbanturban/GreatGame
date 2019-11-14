@@ -26,7 +26,7 @@ namespace CreatorKitCodeInternal
         }
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.layer != 13)
+            if (collision.gameObject.layer == 8 || collision.gameObject.layer == 10 || collision.gameObject.layer == 11)
             {
                 if (snowball != null)
                 {

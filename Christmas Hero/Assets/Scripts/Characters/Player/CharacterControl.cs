@@ -196,8 +196,8 @@ namespace CreatorKitCodeInternal
             {
                 if (m_CurrentTargetCharacterData.Stats.CurrentHealth == 0)
                     m_CurrentTargetCharacterData = null;
-                else
-                    CheckAttack();
+                // else
+                //     CheckAttack();
             }
 
             float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
@@ -509,7 +509,7 @@ namespace CreatorKitCodeInternal
                 snowball.parent = null;
                 // snowball.localPosition = weapon.localPosition;
 
-                Vector3 forward = (targetTransform.position - snowball.transform.position);
+                Vector3 forward = (targetTransform.position - snowball.transform.position) + targetTransform.up;
                 forward.Normalize();
                 snowball.transform.forward = forward;
 
