@@ -505,7 +505,7 @@ namespace CreatorKitCodeInternal
                 snowball.parent = null;
                 // snowball.localPosition = weapon.localPosition;
 
-                Vector3 forward = (targetTransform.position - snowball.transform.position);
+                Vector3 forward = (targetTransform.position - snowball.transform.position) + targetTransform.up;
                 forward.Normalize();
                 snowball.transform.forward = forward;
 
