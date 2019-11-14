@@ -6,19 +6,19 @@ namespace CreatorKitCodeInternal
 {
     public class RandomBGMPlayer : MonoBehaviour
     {
-        public AudioClip[] clips;
+        public AudioClip clip;
 
         // Start is called before the first frame update
         void Start()
         {
-            if (clips.Length == 0)
+            if (clip == null)
             {
                 Destroy(this);
                 return;
             }
 
             var source = GetComponent<AudioSource>();
-            source.clip = clips[Random.Range(0, clips.Length)];
+            source.clip = clip;
             source.Play();
         }
     }
