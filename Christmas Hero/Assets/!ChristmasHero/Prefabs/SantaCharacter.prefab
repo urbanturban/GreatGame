@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 3214874565393210949}
   - component: {fileID: 3214874565393210946}
   - component: {fileID: 3214874565393210947}
+  - component: {fileID: 1969408508147963529}
   m_Layer: 13
   m_Name: SantaCharacter
   m_TagString: Untagged
@@ -772,7 +773,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
-  WeaponLocator: {fileID: 0}
+  weapon: {fileID: 0}
+  hand: {fileID: 0}
   SpurSoundClips:
   - {fileID: 8300000, guid: daa761ef6c428a344b4858008944ac86, type: 3}
   - {fileID: 8300000, guid: 7b0cf46482c46934e9a0b9dd41b0440a, type: 3}
@@ -874,6 +876,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1969408508147963529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214874565393210944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84981d0deda26994986d0e3708dfe074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3214874565485745528
 GameObject:
   m_ObjectHideFlags: 0
