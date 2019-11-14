@@ -88,7 +88,7 @@ namespace CreatorKitCodeInternal {
             m_Animator = GetComponentInChildren<Animator>();
         
             m_Agent.speed = Speed;
-            m_Agent.angularSpeed = 360.0f;
+            m_Agent.angularSpeed = 3600.0f; //default was 360.0f but it makes animation look like shite
 
             m_LastRaycastResult = transform.position;
 
