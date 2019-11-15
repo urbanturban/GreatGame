@@ -445,6 +445,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5115311140064977071, guid: 32695873568dfd149b83eaec94075c15,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -66.259766
+      objectReference: {fileID: 0}
     - target: {fileID: 7453168116110871786, guid: 32695873568dfd149b83eaec94075c15,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -919,6 +924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8293727
+      objectReference: {fileID: 0}
+    - target: {fileID: 5115311140528019869, guid: 32695873568dfd149b83eaec94075c15,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00048828125
       objectReference: {fileID: 0}
     - target: {fileID: 8153588028094353036, guid: 32695873568dfd149b83eaec94075c15,
         type: 3}
@@ -1964,6 +1974,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EffectIcon (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1677150887593362137, guid: 32695873568dfd149b83eaec94075c15,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 79.58984
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32695873568dfd149b83eaec94075c15, type: 3}
