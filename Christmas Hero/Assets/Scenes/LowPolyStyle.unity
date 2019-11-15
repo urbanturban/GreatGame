@@ -2122,7 +2122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1106785859, guid: 32695873568dfd149b83eaec94075c15, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5115311139633769823, guid: 32695873568dfd149b83eaec94075c15,
         type: 3}
@@ -2137,13 +2137,22 @@ PrefabInstance:
     - target: {fileID: 5115311140253566332, guid: 32695873568dfd149b83eaec94075c15,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1106785861, guid: 32695873568dfd149b83eaec94075c15, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: -8551804060256681987, guid: cc5ada824a21cfe44863cd25f9927f85,
         type: 2}
+    - target: {fileID: 1106785861, guid: 32695873568dfd149b83eaec94075c15, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bef8208bb7ac7431dae5fe27c15d9fb6, type: 3}
+    - target: {fileID: 5115311140874672035, guid: 32695873568dfd149b83eaec94075c15,
+        type: 3}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: bef8208bb7ac7431dae5fe27c15d9fb6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32695873568dfd149b83eaec94075c15, type: 3}
 --- !u!1001 &626678971
