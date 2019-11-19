@@ -11,6 +11,7 @@ s .gitignore file should be placed at the root of your Unity project directory
 /[Mm]emoryCaptures/
 # tmp (find corresponding aeests from the beginner template)
 /Assets/Art/Texture/
+/Assets/IgnoredAssets/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
