@@ -6,7 +6,7 @@ namespace CreatorKitCodeInternal
 {
     public class WeaponScript : MonoBehaviour
     {
-        private float timer = 1.0f;
+        private float timer = 1.1f; //throw animation is 2.2 default, 1.1 at 2x speed
         public static Transform snowball;
 
         void Update()
@@ -21,7 +21,7 @@ namespace CreatorKitCodeInternal
             }
             else
             {
-                timer = 1.0f;
+                timer = 1.1f;
             }
         }
         private void OnCollisionEnter(Collision collision)

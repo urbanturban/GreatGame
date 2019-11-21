@@ -254,6 +254,7 @@ namespace CreatorKitCodeInternal
 
                 if (Input.GetMouseButtonDown(1))
                 {
+                  
                     if (m_TargetInteractable == null && m_CurrentTargetCharacterData == null)
                     {
                         InteractableObject obj = m_Highlighted as InteractableObject;
@@ -502,11 +503,17 @@ namespace CreatorKitCodeInternal
             // we make only one snowball exist in the scene at one time
             if (WeaponScript.snowball == null)
             {
+                StopAgent();
+                transform.LookAt(targetTransform); //We could maybe replace it with a Quaternion.RotateTowards for more smooth rotation
                 m_Animator.SetTrigger("Throw"); //Trigger animation for Throw in SantaController
                 Transform snowball = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation);
                 Physics.IgnoreCollision(GetComponent<Collider>(), snowball.gameObject.GetComponent<Collider>(), true);
                 WeaponScript.snowball = snowball;
                 snowball.parent = null;
+               
+
+               
+
                 // snowball.localPosition = weapon.localPosition;
 
                 Vector3 forward = (targetTransform.position - snowball.transform.position) + targetTransform.up;
