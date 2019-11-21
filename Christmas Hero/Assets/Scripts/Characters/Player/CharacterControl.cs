@@ -503,7 +503,7 @@ namespace CreatorKitCodeInternal
             // we make only one snowball exist in the scene at one time
             if (WeaponScript.snowball == null)
             {
-                m_Agent.ResetPath();
+                StopAgent();
                 transform.LookAt(targetTransform); //We could maybe replace it with a Quaternion.RotateTowards for more smooth rotation
                 m_Animator.SetTrigger("Throw"); //Trigger animation for Throw in SantaController
                 Transform snowball = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation);
