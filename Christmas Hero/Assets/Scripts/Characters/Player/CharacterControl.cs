@@ -14,7 +14,7 @@ namespace CreatorKitCodeInternal
     public class CharacterControl : MonoBehaviour,
         AnimationControllerDispatcher.IAttackFrameReceiver,
         AnimationControllerDispatcher.IFootstepFrameReceiver
-        
+
     {
         public static CharacterControl Instance { get; protected set; }
         public float Speed = 10.0f;
@@ -243,31 +243,12 @@ namespace CreatorKitCodeInternal
                             if (data != null)
                             {
                                 m_CurrentTargetCharacterData = data;
+                                ThrowSnowball(data.transform);
+                                // CheckAttack();
                             }
-                            else
+                            else if (WeaponScript.done)
                             {
                                 MoveCheck(screenRay);
-                            }
-                        }
-                    }
-                }
-
-                if (Input.GetMouseButtonDown(1))
-                {
-                  
-                    if (m_TargetInteractable == null && m_CurrentTargetCharacterData == null)
-                    {
-                        InteractableObject obj = m_Highlighted as InteractableObject;
-                        if (obj)
-                        {
-                            ThrowSnowball(obj.transform);
-                        }
-                        else
-                        {
-                            CharacterData data = m_Highlighted as CharacterData;
-                            if (data != null)
-                            {
-                                ThrowSnowball(data.transform);
                             }
                         }
                     }
@@ -403,34 +384,34 @@ namespace CreatorKitCodeInternal
 
         void CheckAttack()
         {
-            if (m_CurrentState == State.ATTACKING)
-                return;
+            // if (m_CurrentState == State.ATTACKING)
+            //     return;
 
-            if (m_CharacterData.CanAttackReach(m_CurrentTargetCharacterData))
-            {
-                StopAgent();
+            // if (m_CharacterData.CanAttackReach(m_CurrentTargetCharacterData))
+            // {
+            //     StopAgent();
 
-                //if the mouse button isn't pressed, we do NOT attack
-                if (Input.GetMouseButton(0))
-                {
-                    Vector3 forward = (m_CurrentTargetCharacterData.transform.position - transform.position);
-                    forward.y = 0;
-                    forward.Normalize();
+            //     //if the mouse button isn't pressed, we do NOT attack
+            //     if (Input.GetMouseButton(0))
+            //     {
+            //         Vector3 forward = (m_CurrentTargetCharacterData.transform.position - transform.position);
+            //         forward.y = 0;
+            //         forward.Normalize();
 
-                    transform.forward = forward;
-                    if (m_CharacterData.CanAttackTarget(m_CurrentTargetCharacterData))
-                    {
-                        m_CurrentState = State.ATTACKING;
+            //         transform.forward = forward;
+            //         if (m_CharacterData.CanAttackTarget(m_CurrentTargetCharacterData))
+            //         {
+            //             m_CurrentState = State.ATTACKING;
 
-                        m_CharacterData.AttackTriggered();
-                        m_Animator.SetTrigger(m_AttackParamID);
-                    }
-                }
-            }
-            else
-            {
-                m_Agent.SetDestination(m_CurrentTargetCharacterData.transform.position);
-            }
+            //             m_CharacterData.AttackTriggered();
+            //             m_Animator.SetTrigger(m_AttackParamID);
+            //         }
+            //     }
+            // }
+            // else
+            // {
+            //     m_Agent.SetDestination(m_CurrentTargetCharacterData.transform.position);
+            // }
         }
 
         public void AttackFrame()
@@ -508,11 +489,9 @@ namespace CreatorKitCodeInternal
                 m_Animator.SetTrigger("Throw"); //Trigger animation for Throw in SantaController
                 Transform snowball = Instantiate(weapon, weapon.transform.position, weapon.transform.rotation);
                 Physics.IgnoreCollision(GetComponent<Collider>(), snowball.gameObject.GetComponent<Collider>(), true);
+                WeaponScript.done = false;
                 WeaponScript.snowball = snowball;
                 snowball.parent = null;
-               
-
-               
 
                 // snowball.localPosition = weapon.localPosition;
 
@@ -521,7 +500,6 @@ namespace CreatorKitCodeInternal
                 snowball.transform.forward = forward;
 
                 Rigidbody snowballRb = snowball.GetComponent<Rigidbody>();
-                snowballRb.Sleep();
                 snowballRb.isKinematic = false;
                 snowballRb.freezeRotation = true;
                 snowballRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
