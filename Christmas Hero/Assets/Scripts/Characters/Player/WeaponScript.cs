@@ -8,6 +8,7 @@ namespace CreatorKitCodeInternal
     {
         private float timer = 1.1f; //throw animation is 2.2 default, 1.1 at 2x speed
         public static Transform snowball;
+        public static bool done = true;
 
         void Update()
         {
@@ -16,6 +17,7 @@ namespace CreatorKitCodeInternal
                 timer -= Time.deltaTime;
                 if (timer <= 0.0f)
                 {
+                    done = true;
                     Destroy(snowball.gameObject);
                 }
             }
@@ -30,16 +32,25 @@ namespace CreatorKitCodeInternal
             {
                 if (snowball != null)
                 {
-                    // snowball.gameObject.GetComponent<Rigidbody>().Sleep();
-                    // snowball.gameObject.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-                    // snowball.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                    Rigidbody snowballRb = snowball.GetComponent<Rigidbody>();
+                    // float power = 300;
+                    // Vector3 pos = snowball.transform.position;
+                    // float radius = 30;
 
-                    // Rigidbody[] rbs = snowball.gameObject.GetComponentsInChildren<Rigidbody>();
-                    // foreach (Rigidbody rb in rbs)
+                    // snowballRb.Sleep();
+                    // snowballRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+                    // snowballRb.isKinematic = true;
+                    snowballRb.useGravity = true;
+                    // snowballRb.AddExplosionForce(power, pos, radius);
+                    // Destroy(snowball.gameObject);
+
+                    // Collider[] colliders = Physics.OverlapSphere(pos, radius);
+                    // foreach (Collider collider in colliders)
                     // {
-                    //     rb.AddExplosionForce(150, transform.position, 30);
+                    //     Rigidbody rb = collider.GetComponent<Rigidbody>();
+                    //     if (rb != null)
+                    //         rb.AddExplosionForce(power, pos, radius);
                     // }
-                    Destroy(snowball.gameObject);
                 }
             }
         }
