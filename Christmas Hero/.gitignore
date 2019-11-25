@@ -24,6 +24,8 @@ s .gitignore file should be placed at the root of your Unity project directory
 
 # Visual Studio cache directory
 .vs/
+# Visual Studio Code cache directory
+.vscode/
 
 # Gradle cache directory
 .gradle/
