@@ -58,6 +58,10 @@ public class RiddleOnClick : MonoBehaviour
             buttonPressed = true;
             minimizeRiddle();
         }
+        if(Input.GetMouseButton(0) && cornerRiddle && !buttonPressed){
+            buttonPressed = true;
+            maximizeRiddle();
+        }
     }
 
     private void minimizeRiddle()
@@ -77,7 +81,7 @@ public class RiddleOnClick : MonoBehaviour
         rt.anchorMax = new Vector2(0.5f, 0.5f);
         rt.pivot = new Vector2(0.5f, 0.5f);
         rt.sizeDelta = new Vector2 (100, 100);
-        //toggleRiddleState();
+        toggleRiddleState();
     }
 
     private void toggleRiddleState()
