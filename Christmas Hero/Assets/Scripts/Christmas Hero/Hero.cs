@@ -22,22 +22,40 @@ public class Hero : MonoBehaviour
         
     }
 
+    public void activateCarrying()
+    {
+        animator.SetBool("isCarrying", true);
+        isCarrying = true;
+    }
+
+    public void deactivateCarrying()
+    {
+        animator.SetBool("isCarrying", false);
+        isCarrying = false;
+    }
+
+    public bool carrying()
+    {
+        return isCarrying;
+    }
+/*
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Present"))
         {
             animator.SetBool("isCarrying", true);
-            other.GetComponent<Pickup>().pickup();
+            other.GetComponent<PresentScript>().pickup();
             isCarrying = true;
         }
         else if (other.CompareTag("House")){
             animator.SetBool("isCarrying", false);
             Debug.Log("Entered house area!");
             if (isCarrying) {
-                GameObject.Find("presentHolder").GetComponentInChildren<Pickup>().drop();
+                GameObject.Find("presentHolder").GetComponentInChildren<PresentScript>().drop();
                 Debug.Log("DROPPED PRESENT");
             }
         }
     }
+    */
 
     }
