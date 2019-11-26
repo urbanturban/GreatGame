@@ -503,8 +503,8 @@ namespace CreatorKitCodeInternal
                 snowballRb.isKinematic = false;
                 snowballRb.freezeRotation = true;
                 snowballRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-                // snowball.transform.position += transform.up;
-                snowballRb.AddForce(snowball.transform.forward * 10, ForceMode.Impulse);
+                snowball.transform.position += transform.up;
+                snowballRb.AddForce(snowball.transform.forward * 15, ForceMode.Impulse);
             }
         }
     }
