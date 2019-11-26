@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class RiddleOnClick : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class RiddleOnClick : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, rayLength, giftLayermask)) {
                 if(hit.collider.tag == "Present") {
+                    float dist = Vector3.Distance(hero.transform.position, hit.collider.transform.position);
+                    if(dist > 2) return;
                     canvas = hit.collider.GetComponent<PresentScript>().getRiddleCanvas();
                     if(hero.GetComponent<Hero>().carrying()){
                         hit.collider.GetComponent<PresentScript>().drop();
@@ -41,17 +44,12 @@ public class RiddleOnClick : MonoBehaviour
                         bigRiddle = false;
                         cornerRiddle = false;
                     }else{
+                        StartCoroutine(waitOneSec());
                         hero.GetComponent<Hero>().activateCarrying();
                         hit.collider.GetComponent<PresentScript>().pickup();
-                        canvas.GetComponent<Canvas>().enabled = true;
-                        bigRiddle = true;
-                        cornerRiddle = false;
-                        maximizeRiddle();
                     }
                     
                 }
-            }else if(Physics.Raycast(ray, out hit, rayLength, uiLayer) && cornerRiddle && !buttonPressed) {
-                Debug.Log("Clicked corner-riddle!");
             }
         }
         if(Input.GetMouseButton(0) && bigRiddle && !buttonPressed){
@@ -88,5 +86,13 @@ public class RiddleOnClick : MonoBehaviour
     {
         bigRiddle = !bigRiddle;
         cornerRiddle = !cornerRiddle;
+    }
+
+    private IEnumerator waitOneSec(){
+        yield return new WaitForSeconds(1);
+        canvas.GetComponent<Canvas>().enabled = true;
+        bigRiddle = true;
+        cornerRiddle = false;
+        maximizeRiddle();
     }
 }
