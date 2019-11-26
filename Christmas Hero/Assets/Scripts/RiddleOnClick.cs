@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RiddleOnClick : MonoBehaviour,  IPointerClickHandler
+public class RiddleOnClick : MonoBehaviour
 {
     public float rayLength;
     public LayerMask giftLayermask;
@@ -19,11 +19,6 @@ public class RiddleOnClick : MonoBehaviour,  IPointerClickHandler
         bigRiddle = false;
         cornerRiddle = false;
         buttonPressed = false;
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
     }
 
     private void Update()
@@ -55,7 +50,7 @@ public class RiddleOnClick : MonoBehaviour,  IPointerClickHandler
                     }
                     
                 }
-            }else if(Physics.Raycast(ray, out hit, rayLength, uiLayer)) {
+            }else if(Physics.Raycast(ray, out hit, rayLength, uiLayer) && cornerRiddle && !buttonPressed) {
                 Debug.Log("Clicked corner-riddle!");
             }
         }
