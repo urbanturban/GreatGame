@@ -9,14 +9,12 @@ public class Hero : MonoBehaviour
     private bool isCarrying;
     private Animator animator;
 
-    // Start is called before the first frame update
     void Start()
     {
         isCarrying = false;
         animator = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
