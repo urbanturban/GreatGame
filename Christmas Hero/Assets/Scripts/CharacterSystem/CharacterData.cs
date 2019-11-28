@@ -77,7 +77,10 @@ namespace CreatorKitCode
         /// <returns>True if you can reach the target, False otherwise</returns>
         public bool CanAttackReach(CharacterData target)
         {
-            return Equipment.Weapon.CanHit(this, target);
+            if(Equipment != null && Equipment.Weapon != null){
+                return Equipment.Weapon.CanHit(this, target);
+            }
+            return false;
         }
 
         /// <summary>
