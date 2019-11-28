@@ -1316,8 +1316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3d267ff6fabdc4e8b9a091ba04c8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackFrameReceiver: {fileID: 3742894883523148485}
-  FootstepFrameReceiver: {fileID: 3742894883523148485}
+  AttackFrameReceiver: {fileID: 3742894884089384469}
+  FootstepFrameReceiver: {fileID: 3742894884089384469}
 --- !u!1001 &504414370760085845
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -563,6 +563,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AdditionalVertexStreamMesh: {fileID: 0}
+--- !u!114 &51277613 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3742894883523148485, guid: a0d76bde92a8eb941ab5c943ade08304,
+    type: 3}
+  m_PrefabInstance: {fileID: 2264440293136021627}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fa481e19c183b4489be917e1350a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &51277615 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3742894883523148491, guid: a0d76bde92a8eb941ab5c943ade08304,
+    type: 3}
+  m_PrefabInstance: {fileID: 2264440293136021627}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &90700666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1436,7 +1454,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ListenerTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 51277615}
     - target: {fileID: 5115311140253566335, guid: 32695873568dfd149b83eaec94075c15,
         type: 3}
       propertyPath: m_Enabled
@@ -3020,6 +3038,11 @@ PrefabInstance:
       propertyPath: clip
       value: 
       objectReference: {fileID: 8300000, guid: bef8208bb7ac7431dae5fe27c15d9fb6, type: 3}
+    - target: {fileID: 5115311140414521540, guid: 32695873568dfd149b83eaec94075c15,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32695873568dfd149b83eaec94075c15, type: 3}
 --- !u!1001 &626678971
@@ -6192,6 +6215,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3742894883523148485, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: SpurSoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: daa761ef6c428a344b4858008944ac86, type: 3}
+    - target: {fileID: 3742894883523148485, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: SpurSoundClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b0cf46482c46934e9a0b9dd41b0440a, type: 3}
+    - target: {fileID: 3742894883523148485, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: SpurSoundClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 11f81a1d4cbde2f4e943503e5e123e5e, type: 3}
+    - target: {fileID: 3742894883523148485, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: SpurSoundClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 10f3af480312d4f408f699205054cf74, type: 3}
     - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
         type: 3}
       propertyPath: VocalAttack.Array.size
@@ -6217,6 +6260,36 @@ PrefabInstance:
       propertyPath: VocalAttack.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: FootstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d94b4ce3bae55504aa6026ee0a77186c, type: 3}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: FootstepClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d87b48a617c3e4142b9d89d40f2fa5a7, type: 3}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: FootstepClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ab437920d385c84aa76a0039cba6951, type: 3}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: FootstepClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: e2e19fb49cd913f46b0e2a97fbc2d307, type: 3}
+    - target: {fileID: 3742894884089384469, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: AttackFrameReceiver
+      value: 
+      objectReference: {fileID: 51277613}
+    - target: {fileID: 3742894884089384469, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: FootstepFrameReceiver
+      value: 
+      objectReference: {fileID: 51277613}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0d76bde92a8eb941ab5c943ade08304, type: 3}
 --- !u!1001 &2527994518903917462
