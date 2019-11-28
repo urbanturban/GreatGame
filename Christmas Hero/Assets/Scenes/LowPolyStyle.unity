@@ -6192,6 +6192,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: VocalAttack.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: VocalAttack.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: VocalAttack.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: VocalAttack.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742894883523148487, guid: a0d76bde92a8eb941ab5c943ade08304,
+        type: 3}
+      propertyPath: VocalAttack.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0d76bde92a8eb941ab5c943ade08304, type: 3}
 --- !u!1001 &2527994518903917462
