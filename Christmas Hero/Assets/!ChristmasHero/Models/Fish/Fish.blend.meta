@@ -1,23 +1,21 @@
 fileFormatVersion: 2
-guid: 98eace2089d14a84ea904cc0a465a218
+guid: e7752e5405b19a34e9e36d4afdd6aadb
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: -3226448040575204656
-    second: WolfArmature|Idle
-  - first:
-      74: -7055130361298753953
-    second: WolfArmature|Walking
+      74: -623603649343465320
+    second: Swim
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Wolf
-    second: {fileID: 2100000, guid: 244c0b732f15a8740b71aad4c4e30e68, type: 2}
+      name: Material.001
+    second: {fileID: -6478536213147159724, guid: ee2ffbc296c4ab54c9006af711c5c7b2,
+      type: 3}
   materials:
     importMaterials: 1
-    materialName: 1
+    materialName: 0
     materialSearch: 1
     materialLocation: 1
   animations:
@@ -43,11 +41,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: WolfArmature|Idle
-      takeName: WolfArmature|Idle
+      name: Swim
+      takeName: Scene
       internalID: 0
-      firstFrame: 0
-      lastFrame: 40
+      firstFrame: 1
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -70,36 +68,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: WolfArmature|Walking
-      takeName: WolfArmature|Walking
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 40
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []

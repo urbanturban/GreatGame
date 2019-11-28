@@ -1,23 +1,38 @@
 fileFormatVersion: 2
-guid: 98eace2089d14a84ea904cc0a465a218
+guid: 4126270ba5b6af14f9ca2578b9b433a6
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: -3226448040575204656
-    second: WolfArmature|Idle
+      74: -2387405226041677247
+    second: PiranhaArmature|Bite
   - first:
-      74: -7055130361298753953
-    second: WolfArmature|Walking
+      74: 787284050277188520
+    second: PiranhaArmature|Swimming
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Wolf
-    second: {fileID: 2100000, guid: 244c0b732f15a8740b71aad4c4e30e68, type: 2}
+      name: Black
+    second: {fileID: 2100000, guid: 348133ffcdd5fe94cb258b248cd49ed0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown
+    second: {fileID: 2100000, guid: 424896de1c38e5d40b86909091be5ab6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightYellow
+    second: {fileID: 2100000, guid: c3d7c1c3337481e46a803c91c8a36042, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White
+    second: {fileID: 2100000, guid: 1bd56c10ed127fe4bb18d1ffa4f2a89f, type: 2}
   materials:
     importMaterials: 1
-    materialName: 1
+    materialName: 0
     materialSearch: 1
     materialLocation: 1
   animations:
@@ -43,11 +58,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: WolfArmature|Idle
-      takeName: WolfArmature|Idle
+      name: PiranhaArmature|Bite
+      takeName: PiranhaArmature|Bite
       internalID: 0
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -72,11 +87,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: WolfArmature|Walking
-      takeName: WolfArmature|Walking
+      name: PiranhaArmature|Swimming
+      takeName: PiranhaArmature|Swimming
       internalID: 0
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
