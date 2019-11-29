@@ -9,7 +9,7 @@ public class PresentScript : MonoBehaviour
     public GameObject pickupSpot;
     public Canvas canvas;
 
-    public AudioClip[] GiftInteractionClips;
+    public AudioClip[] PresentSFXClips;
     public SFXManager.Use UseType;
 
     private Rigidbody rb;
@@ -43,7 +43,7 @@ public class PresentScript : MonoBehaviour
         //Instruct SFX manager to play sound at location of the transform this script is attached to (the present)
         SFXManager.PlaySound(UseType, new SFXManager.PlayData()
         {
-            Clip = GiftInteractionClips[0],
+            Clip = PresentSFXClips[0],
             Position = transform.position
         });
     }
@@ -56,9 +56,11 @@ public class PresentScript : MonoBehaviour
 
         SFXManager.PlaySound(UseType, new SFXManager.PlayData()
         {
-            Clip = GiftInteractionClips[1],
+            Clip = PresentSFXClips[1],
             Position = transform.position
         });
+
+
     }
 
 
