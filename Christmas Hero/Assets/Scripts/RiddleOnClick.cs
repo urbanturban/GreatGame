@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
+using CreatorKitCode;
 
 public class RiddleOnClick : MonoBehaviour
 {
@@ -11,15 +12,16 @@ public class RiddleOnClick : MonoBehaviour
 
     private GameObject hero;
     private Canvas canvas;
-    private bool bigRiddle;
-    private bool cornerRiddle;
+
     private bool buttonPressed;
+    private bool riddleToggle; //Replacing bigRiddle and cornerRiddle. true:big, false:corner
+
+    public AudioClip[] RiddleSFXClips;
+    public SFXManager.Use UseType;
 
     void Start()
     {
         hero = GameObject.Find("SantaCharacter");
-        bigRiddle = false;
-        cornerRiddle = false;
         buttonPressed = false;
     }
 
@@ -42,27 +44,23 @@ public class RiddleOnClick : MonoBehaviour
                         hit.collider.GetComponent<PresentScript>().drop();
                         hero.GetComponent<Hero>().deactivateCarrying();
                         canvas.GetComponent<Canvas>().enabled = false;
-                        bigRiddle = false;
-                        cornerRiddle = false;
-                    }else{
+                    }
+                    else {
                         StartCoroutine(waitOneSec());
                         hero.GetComponent<Hero>().activateCarrying();
                         hit.collider.GetComponent<PresentScript>().pickup();
                     }
-                    
                 }
             }
         }
-        if(Input.GetMouseButton(0) && bigRiddle && !buttonPressed){
+        if(Input.GetMouseButton(0) && !buttonPressed)
+        {
             buttonPressed = true;
-            minimizeRiddle();
-        }
-        if(Input.GetMouseButton(0) && cornerRiddle && !buttonPressed){
-            buttonPressed = true;
-            maximizeRiddle();
+            if (riddleToggle)
+                minimizeRiddle();
+            else maximizeRiddle();    
         }
     }
-
     private void minimizeRiddle()
     {
         RectTransform rt = canvas.transform.Find("Image").gameObject.GetComponent (typeof (RectTransform)) as RectTransform;
@@ -72,7 +70,6 @@ public class RiddleOnClick : MonoBehaviour
         rt.sizeDelta = new Vector2 (30, 30);
         toggleRiddleState();
     }
-
     private void maximizeRiddle()
     {
         RectTransform rt = canvas.transform.Find("Image").gameObject.GetComponent (typeof (RectTransform)) as RectTransform;
@@ -85,15 +82,17 @@ public class RiddleOnClick : MonoBehaviour
 
     private void toggleRiddleState()
     {
-        bigRiddle = !bigRiddle;
-        cornerRiddle = !cornerRiddle;
+        riddleToggle = !riddleToggle;
+        SFXManager.PlaySound(UseType, new SFXManager.PlayData()
+        {
+            Clip = RiddleSFXClips[riddleToggle?0:1],
+            Position = transform.position
+        });
     }
 
     private IEnumerator waitOneSec(){
         yield return new WaitForSeconds(1);
         canvas.GetComponent<Canvas>().enabled = true;
-        bigRiddle = true;
-        cornerRiddle = false;
         maximizeRiddle();
     }
 }
