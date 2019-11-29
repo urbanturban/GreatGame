@@ -46,6 +46,12 @@ namespace CreatorKitCode
 
         [Header("Defaults")]
         public AudioClip[] DefaultSwingSound;
+
+        internal static void PlaySound(object useType, PlayData playData)
+        {
+            throw new NotImplementedException();
+        }
+
         public AudioClip[] DefaultHitSound;
         public AudioClip DefaultItemUsedSound;
         public AudioClip DefaultItemEquipedSound;

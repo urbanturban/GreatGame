@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CreatorKitCode;
 
 public class PresentScript : MonoBehaviour
 {
 
     public GameObject pickupSpot;
     public Canvas canvas;
+
+    public AudioClip[] GiftInteractionClips;
+    public SFXManager.Use UseType;
 
     private Rigidbody rb;
 
@@ -35,6 +39,13 @@ public class PresentScript : MonoBehaviour
         rb.useGravity = false;
         this.transform.position = pickupSpot.transform.position;
         this.transform.parent = pickupSpot.transform;
+
+        //Instruct SFX manager to play sound at location of the transform this script is attached to (the present)
+        SFXManager.PlaySound(UseType, new SFXManager.PlayData()
+        {
+            Clip = GiftInteractionClips[0],
+            Position = transform.position
+        });
     }
 
     public void drop() {
@@ -42,6 +53,13 @@ public class PresentScript : MonoBehaviour
         this.transform.parent = null;
         rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
         rb.useGravity = true;
+
+        SFXManager.PlaySound(UseType, new SFXManager.PlayData()
+        {
+            Clip = GiftInteractionClips[1],
+            Position = transform.position
+        });
     }
+
 
 }

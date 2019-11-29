@@ -30,8 +30,8 @@ namespace CreatorKitCodeInternal
         public Transform weapon;
         public Transform hand;
 
-        [Header("Audio")]
-        public AudioClip[] SpurSoundClips;
+        //[Header("Audio")]
+        //public AudioClip[] SpurSoundClips;
 
         Vector3 m_LastRaycastResult;
         Animator m_Animator;
@@ -463,10 +463,12 @@ namespace CreatorKitCodeInternal
 
         public void FootstepFrame()
         {
+            //Animation running events -> AnimationDispatcher -> CharacterController -> FootstepFrame (plays "spur"sound)-> CharacterAudio (plays footstep sounds)
             Vector3 pos = transform.position;
-
             m_CharacterAudio.Step(pos);
-
+            
+            //Footstep sounds defined in CharacterAudio is enough.
+            /*
             SFXManager.PlaySound(SFXManager.Use.Player, new SFXManager.PlayData()
             {
                 Clip = SpurSoundClips[Random.Range(0, SpurSoundClips.Length)],
@@ -475,7 +477,7 @@ namespace CreatorKitCodeInternal
                 PitchMax = 1.2f,
                 Volume = 0.3f
             });
-
+            */
             VFXManager.PlayVFX(VFXType.StepPuff, pos);
         }
 

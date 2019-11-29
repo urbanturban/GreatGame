@@ -4,6 +4,7 @@ using System.Collections;
 
 public class RiddleOnClick : MonoBehaviour
 {
+    //Attached to Camera atm
     public float rayLength;
     public LayerMask giftLayermask;
     public LayerMask uiLayer;
