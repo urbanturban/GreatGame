@@ -106,6 +106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c61cf59073c7f4db2c114165471f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseType: 0
+  snowballHitSFX:
+  - {fileID: 8300000, guid: a7ff74b9e0be64b45bb4b2f17099bdbd, type: 3}
+  - {fileID: 8300000, guid: a9be09d414a174bf6afa20e6d1a97be5, type: 3}
+  - {fileID: 8300000, guid: b4687018faed14139946bb99c09c6923, type: 3}
+  - {fileID: 8300000, guid: 159749edfc3df49f698170efe6963823, type: 3}
 --- !u!54 &1760030319728199793
 Rigidbody:
   m_ObjectHideFlags: 0
