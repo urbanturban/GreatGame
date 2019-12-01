@@ -9,11 +9,10 @@ namespace CreatorKitCodeInternal
     {
         public AudioClip[] FootstepClips;
         public AudioClip[] VocalAttack;
-    
         public AudioClip[] VocalHit;
-
         public AudioClip[] DeathClips;
-    
+
+
         public SFXManager.Use UseType;
     
         public void Attack(Vector3 position)
