@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CreatorKitCode;
 
 namespace CreatorKitCodeInternal
 {
+
     public class WeaponScript : MonoBehaviour
     {
+        public SFXManager.Use UseType;
+        public AudioClip[] snowballHitSFX;
         private float timer = 1.1f; //throw animation is 2.2 default, 1.1 at 2x speed
         public static Transform snowball;
         public static bool done = true;
@@ -41,6 +45,11 @@ namespace CreatorKitCodeInternal
                     // snowballRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
                     // snowballRb.isKinematic = true;
                     snowballRb.useGravity = true;
+                    SFXManager.PlaySound(UseType, new SFXManager.PlayData()
+                    {
+                        Clip = snowballHitSFX[Random.Range(0,snowballHitSFX.Length)],
+                        Position = transform.position
+                    });
                     // snowballRb.AddExplosionForce(power, pos, radius);
                     // Destroy(snowball.gameObject);
 

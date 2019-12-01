@@ -20,11 +20,11 @@ namespace CreatorKitCodeInternal {
                 Vector3 position = m_MonoBehaviour.transform.position;
 
                 m_Audio.Attack(position);
-                SFXManager.PlaySound(m_Audio.UseType, new SFXManager.PlayData()
-                {
-                    Clip = m_MonoBehaviour.Equipment.Weapon.GetSwingSound(),
-                    Position = position
-                });
+               // SFXManager.PlaySound(m_Audio.UseType, new SFXManager.PlayData()
+              //  {
+               //     Clip = m_MonoBehaviour.Equipment.Weapon.GetSwingSound(),
+               //     Position = position
+               // });
             }
         }
     }

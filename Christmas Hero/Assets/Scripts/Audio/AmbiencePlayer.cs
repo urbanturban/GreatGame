@@ -18,8 +18,8 @@ namespace CreatorKitCodeInternal
 
         public static void UpdateVolume(float zoomRatio)
         {
-            s_Instance.CloseAudioSource.volume = 1.0f - zoomRatio;
-            s_Instance.FarAudioSource.volume = zoomRatio;
+           // s_Instance.CloseAudioSource.volume = 1.0f - zoomRatio;
+           // s_Instance.FarAudioSource.volume = zoomRatio;
         }
     }
 }
