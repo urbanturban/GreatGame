@@ -10,9 +10,11 @@ namespace CreatorKitCodeInternal
     {
         public SFXManager.Use UseType;
         public AudioClip[] snowballHitSFX;
+        private bool firstHit = false;
         private float timer = 1.1f; //throw animation is 2.2 default, 1.1 at 2x speed
         public static Transform snowball;
         public static bool done = true;
+
 
         void Update()
         {
@@ -45,11 +47,17 @@ namespace CreatorKitCodeInternal
                     // snowballRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
                     // snowballRb.isKinematic = true;
                     snowballRb.useGravity = true;
-                    SFXManager.PlaySound(UseType, new SFXManager.PlayData()
+                    if (firstHit == false) //Only play sound on first collision not on the bounces
                     {
-                        Clip = snowballHitSFX[Random.Range(0,snowballHitSFX.Length)],
-                        Position = transform.position
-                    });
+                        firstHit = true;
+                        SFXManager.PlaySound(UseType, new SFXManager.PlayData()
+                        {
+                            
+                            Clip = snowballHitSFX[Random.Range(0, snowballHitSFX.Length)],
+                            Position = transform.position
+                        });
+                    }
+
                     // snowballRb.AddExplosionForce(power, pos, radius);
                     // Destroy(snowball.gameObject);
 
