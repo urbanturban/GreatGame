@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CreatorKitCode 
+namespace CreatorKitCode
 {
     /// <summary>
     /// Handles the stats of a CharacterData. It stores the health and strength/agility/defense stats.
@@ -30,7 +30,7 @@ namespace CreatorKitCode
             Electric
             //ADD YOUR CUSTOM TYPE AFTER
         }
-    
+
         /// <summary>
         /// Store the stats, which are composed of 4 values : health, strength, agility and defense.
         /// It also contains elemental protections and boost (1 for each elements defined by the DamageType enum)
@@ -45,16 +45,16 @@ namespace CreatorKitCode
             public int agility;
 
             //use an array indexed by the DamageType enum for easy extensibility
-            public int[] elementalProtection = new int[Enum.GetValues(typeof(DamageType)).Length];   
+            public int[] elementalProtection = new int[Enum.GetValues(typeof(DamageType)).Length];
             public int[] elementalBoosts = new int[Enum.GetValues(typeof(DamageType)).Length];
-        
+
             public void Copy(Stats other)
             {
                 health = other.health;
                 strength = other.strength;
                 defense = other.defense;
                 agility = other.agility;
-            
+
                 Array.Copy(other.elementalProtection, elementalProtection, other.elementalProtection.Length);
                 Array.Copy(other.elementalBoosts, elementalBoosts, other.elementalBoosts.Length);
             }
@@ -72,12 +72,12 @@ namespace CreatorKitCode
                     strength += Mathf.FloorToInt(strength * (modifier.Stats.strength / 100.0f));
                     defense += Mathf.FloorToInt(defense * (modifier.Stats.defense / 100.0f));
                     agility += Mathf.FloorToInt(agility * (modifier.Stats.agility / 100.0f));
-                
-                    for(int i = 0; i < elementalProtection.Length; ++i)
+
+                    for (int i = 0; i < elementalProtection.Length; ++i)
                         elementalProtection[i] += Mathf.FloorToInt(elementalProtection[i] * (modifier.Stats.elementalProtection[i] / 100.0f));
-                
-                    for(int i = 0; i < elementalBoosts.Length; ++i)
-                        elementalBoosts[i] += Mathf.FloorToInt(elementalBoosts[i] * (modifier.Stats.elementalBoosts[i]/100.0f));
+
+                    for (int i = 0; i < elementalBoosts.Length; ++i)
+                        elementalBoosts[i] += Mathf.FloorToInt(elementalBoosts[i] * (modifier.Stats.elementalBoosts[i] / 100.0f));
                 }
                 else
                 {
@@ -85,16 +85,16 @@ namespace CreatorKitCode
                     strength += modifier.Stats.strength;
                     defense += modifier.Stats.defense;
                     agility += modifier.Stats.agility;
-                
-                    for(int i = 0; i < elementalProtection.Length; ++i)
+
+                    for (int i = 0; i < elementalProtection.Length; ++i)
                         elementalProtection[i] += modifier.Stats.elementalProtection[i];
-                
-                    for(int i = 0; i < elementalBoosts.Length; ++i)
+
+                    for (int i = 0; i < elementalBoosts.Length; ++i)
                         elementalBoosts[i] += modifier.Stats.elementalBoosts[i];
                 }
             }
         }
-    
+
         /// <summary>
         /// Can be added to a stack of modifiers on the StatSystem to modify the value of the base stats
         /// e.g. a weapon adding +2 strength will push a modifier on the top of the stack.
@@ -118,7 +118,7 @@ namespace CreatorKitCode
             public Mode ModifierMode = Mode.Absolute;
             public Stats Stats = new Stats();
         }
-        
+
         /// <summary>
         /// This is a special StatModifier, that gets added to the TimedStatModifier stack, that will be automatically
         /// removed when its timer reaches 0. Contains a StatModifier that controls the actual modification.
@@ -130,7 +130,7 @@ namespace CreatorKitCode
             public StatModifier Modifier;
 
             public Sprite EffectSprite;
-        
+
             public float Duration;
             public float Timer;
 
@@ -139,35 +139,35 @@ namespace CreatorKitCode
                 Timer = Duration;
             }
         }
-    
+
         public Stats baseStats;
         public Stats stats { get; set; } = new Stats();
-    
+
 
         public int CurrentHealth { get; private set; }
         public List<BaseElementalEffect> ElementalEffects => m_ElementalEffects;
         public List<TimedStatModifier> TimedModifierStack => m_TimedModifierStack;
 
         CharacterData m_Owner;
-    
+
         List<StatModifier> m_ModifiersStack = new List<StatModifier>();
         List<TimedStatModifier> m_TimedModifierStack = new List<TimedStatModifier>();
         List<BaseElementalEffect> m_ElementalEffects = new List<BaseElementalEffect>();
-    
+
         public void Init(CharacterData owner)
         {
             stats.Copy(baseStats);
             CurrentHealth = stats.health;
             m_Owner = owner;
         }
-    
+
         /// <summary>
         /// Add a modifier to the end of the stack. This will recompute the Stats so it now include the new modifier.
         /// </summary>
         /// <param name="modifier"></param>
         public void AddModifier(StatModifier modifier)
         {
-            m_ModifiersStack.Add(modifier);    
+            m_ModifiersStack.Add(modifier);
             UpdateFinalStats();
         }
 
@@ -207,14 +207,14 @@ namespace CreatorKitCode
 
             if (!found)
             {
-                m_TimedModifierStack.Add(new TimedStatModifier(){ Id = id});
+                m_TimedModifierStack.Add(new TimedStatModifier() { Id = id });
             }
 
             m_TimedModifierStack[index].EffectSprite = sprite;
             m_TimedModifierStack[index].Duration = duration;
             m_TimedModifierStack[index].Modifier = modifier;
             m_TimedModifierStack[index].Reset();
-        
+
             UpdateFinalStats();
         }
 
@@ -226,7 +226,7 @@ namespace CreatorKitCode
         public void AddElementalEffect(BaseElementalEffect effect)
         {
             effect.Applied(m_Owner);
-        
+
             bool replaced = false;
             for (int i = 0; i < m_ElementalEffects.Count; ++i)
             {
@@ -237,26 +237,26 @@ namespace CreatorKitCode
                     m_ElementalEffects[i] = effect;
                 }
             }
-        
-            if(!replaced)
+
+            if (!replaced)
                 m_ElementalEffects.Add(effect);
         }
 
         public void Death()
         {
-            foreach(var e in ElementalEffects)
+            foreach (var e in ElementalEffects)
                 e.Removed();
-        
+
             ElementalEffects.Clear();
             TimedModifierStack.Clear();
-        
+
             UpdateFinalStats();
         }
 
         public void Tick()
         {
             bool needUpdate = false;
-        
+
             for (int i = 0; i < m_TimedModifierStack.Count; ++i)
             {
                 //permanent modifier will have a timer == -1.0f, so jump over them
@@ -271,15 +271,15 @@ namespace CreatorKitCode
                     }
                 }
             }
-        
-            if(needUpdate)
+
+            if (needUpdate)
                 UpdateFinalStats();
 
             for (int i = 0; i < m_ElementalEffects.Count; ++i)
             {
                 var effect = m_ElementalEffects[i];
                 effect.Update(this);
-            
+
                 if (effect.Done)
                 {
                     m_ElementalEffects[i].Removed();
@@ -297,20 +297,21 @@ namespace CreatorKitCode
         public void ChangeHealth(int amount)
         {
             CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, stats.health);
+            // Debug.Log("<color=green>OK</color>" + CurrentHealth);
         }
 
         void UpdateFinalStats()
         {
             bool maxHealthChange = false;
             int previousHealth = stats.health;
-        
+
             stats.Copy(baseStats);
 
             foreach (var modifier in m_ModifiersStack)
             {
                 if (modifier.Stats.health != 0)
                     maxHealthChange = true;
-            
+
                 stats.Modify(modifier);
             }
 
@@ -318,7 +319,7 @@ namespace CreatorKitCode
             {
                 if (timedModifier.Modifier.Stats.health != 0)
                     maxHealthChange = true;
-            
+
                 stats.Modify(timedModifier.Modifier);
             }
 
@@ -326,7 +327,7 @@ namespace CreatorKitCode
             if (maxHealthChange)
             {
                 float percentage = CurrentHealth / (float)previousHealth;
-                CurrentHealth = Mathf.RoundToInt(percentage * stats.health );
+                CurrentHealth = Mathf.RoundToInt(percentage * stats.health);
             }
         }
 
@@ -340,7 +341,7 @@ namespace CreatorKitCode
         public void Damage(Weapon.AttackData attackData)
         {
             int totalDamage = attackData.GetFullDamage();
-        
+
             ChangeHealth(-totalDamage);
             DamageUI.Instance.NewDamage(totalDamage, m_Owner.transform.position);
         }
@@ -361,7 +362,7 @@ public class StatsDrawer : PropertyDrawer
 
         return propertyHeight;
     }
-    
+
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         EditorGUI.BeginProperty(position, label, property);
@@ -371,24 +372,24 @@ public class StatsDrawer : PropertyDrawer
 
         var currentRect = position;
         currentRect.height = EditorGUIUtility.singleLineHeight;
-        
+
         EditorGUI.DropShadowLabel(currentRect, property.displayName);
-        
+
         currentRect.y += EditorGUIUtility.singleLineHeight + 6f;
         EditorGUI.PropertyField(currentRect, property.FindPropertyRelative(nameof(StatSystem.Stats.health)));
-        
+
         currentRect.y += EditorGUIUtility.singleLineHeight;
         EditorGUI.PropertyField(currentRect, property.FindPropertyRelative(nameof(StatSystem.Stats.strength)));
-        
+
         currentRect.y += EditorGUIUtility.singleLineHeight;
         EditorGUI.PropertyField(currentRect, property.FindPropertyRelative(nameof(StatSystem.Stats.defense)));
-        
+
         currentRect.y += EditorGUIUtility.singleLineHeight;
         EditorGUI.PropertyField(currentRect, property.FindPropertyRelative(nameof(StatSystem.Stats.agility)));
 
         currentRect.y += EditorGUIUtility.singleLineHeight;
         EditorGUI.LabelField(currentRect, "Elemental Protection/Boost", style);
-        
+
         currentRect.y += EditorGUIUtility.singleLineHeight;
         currentRect.width *= 0.3f;
 
@@ -401,20 +402,20 @@ public class StatsDrawer : PropertyDrawer
 
         var elementalProtectionProp = property.FindPropertyRelative(nameof(StatSystem.Stats.elementalProtection));
         var elementalBoostProp = property.FindPropertyRelative(nameof(StatSystem.Stats.elementalBoosts));
-        
+
         for (int i = 0; i < names.Length; ++i)
         {
             currentRect.x -= currentRect.width * 2;
             currentRect.y += EditorGUIUtility.singleLineHeight;
             EditorGUI.LabelField(currentRect, names[i]);
-            
+
             currentRect.x += currentRect.width;
             EditorGUI.PropertyField(currentRect, elementalProtectionProp.GetArrayElementAtIndex(i), GUIContent.none);
-            
+
             currentRect.x += currentRect.width;
             EditorGUI.PropertyField(currentRect, elementalBoostProp.GetArrayElementAtIndex(i), GUIContent.none);
         }
-        
+
         EditorGUI.EndProperty();
     }
 }

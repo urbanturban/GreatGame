@@ -15,6 +15,8 @@ namespace CreatorKitCodeInternal
         public static Transform snowball;
         public static bool done = true;
 
+        public static CharacterData m_CharacterData;
+        public static CharacterData m_CurrentTargetCharacterData;
 
         void Update()
         {
@@ -52,10 +54,13 @@ namespace CreatorKitCodeInternal
                         firstHit = true;
                         SFXManager.PlaySound(UseType, new SFXManager.PlayData()
                         {
-                            
                             Clip = snowballHitSFX[Random.Range(0, snowballHitSFX.Length)],
                             Position = transform.position
                         });
+                    }
+                    if (collision.gameObject.layer == 11)
+                    {
+                        m_CurrentTargetCharacterData.Stats.ChangeHealth(-3);
                     }
 
                     // snowballRb.AddExplosionForce(power, pos, radius);

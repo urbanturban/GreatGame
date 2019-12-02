@@ -4,7 +4,7 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-namespace CreatorKitCode 
+namespace CreatorKitCode
 {
     /// <summary>
     /// This defines a character in the game. The name Character is used in a loose sense, it just means something that
@@ -23,7 +23,7 @@ namespace CreatorKitCode
         public EquipmentSystem Equipment = new EquipmentSystem();
 
         public AudioClip[] HitClip;
-    
+
         /// <summary>
         /// Callback for when that CharacterData receive damage. E.g. used by the player character to trigger the right
         /// animation
@@ -56,7 +56,7 @@ namespace CreatorKitCode
         void Awake()
         {
             Animator anim = GetComponentInChildren<Animator>();
-            if(anim != null)
+            if (anim != null)
                 SceneLinkedSMB<CharacterData>.Initialise(anim, this);
         }
 
@@ -77,7 +77,8 @@ namespace CreatorKitCode
         /// <returns>True if you can reach the target, False otherwise</returns>
         public bool CanAttackReach(CharacterData target)
         {
-            if(Equipment != null && Equipment.Weapon != null){
+            if (Equipment != null && Equipment.Weapon != null)
+            {
                 return Equipment.Weapon.CanHit(this, target);
             }
             return false;
@@ -95,7 +96,7 @@ namespace CreatorKitCode
         {
             if (target.Stats.CurrentHealth == 0)
                 return false;
-        
+
             if (!CanAttackReach(target))
                 return false;
 
@@ -142,19 +143,19 @@ namespace CreatorKitCode
         /// <param name="attackData"></param>
         public void Damage(Weapon.AttackData attackData)
         {
-            if (HitClip.Length != 0)
-            {
-                SFXManager.PlaySound(SFXManager.Use.Player, new SFXManager.PlayData()
-                {
-                    Clip = HitClip[Random.Range(0, HitClip.Length)],
-                    PitchMax =  1.1f,
-                    PitchMin =  0.8f,
-                    Position = transform.position
-                });
-            }
-        
+            // if (HitClip.Length != 0)
+            // {
+            //     SFXManager.PlaySound(SFXManager.Use.Player, new SFXManager.PlayData()
+            //     {
+            //         Clip = HitClip[Random.Range(0, HitClip.Length)],
+            //         PitchMax =  1.1f,
+            //         PitchMin =  0.8f,
+            //         Position = transform.position
+            //     });
+            // }
+
             Stats.Damage(attackData);
-            
+
             OnDamage?.Invoke();
         }
     }
