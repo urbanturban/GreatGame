@@ -466,7 +466,7 @@ namespace CreatorKitCodeInternal
             //Animation running events -> AnimationDispatcher -> CharacterController -> FootstepFrame (plays "spur"sound)-> CharacterAudio (plays footstep sounds)
             Vector3 pos = transform.position;
             m_CharacterAudio.Step(pos);
-            
+
             //Footstep sounds defined in CharacterAudio is enough.
             /*
             SFXManager.PlaySound(SFXManager.Use.Player, new SFXManager.PlayData()
@@ -493,6 +493,8 @@ namespace CreatorKitCodeInternal
                 Physics.IgnoreCollision(GetComponent<Collider>(), snowball.gameObject.GetComponent<Collider>(), true);
                 WeaponScript.done = false;
                 WeaponScript.snowball = snowball;
+                WeaponScript.m_CharacterData = m_CharacterData;
+                WeaponScript.m_CurrentTargetCharacterData = m_CurrentTargetCharacterData;
                 snowball.parent = null;
 
                 // snowball.localPosition = weapon.localPosition;
