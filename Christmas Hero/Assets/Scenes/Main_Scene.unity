@@ -886,7 +886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4342287839684576, guid: 5cf5680f3c3895349b25c3b50dfb2918, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4342287839684576, guid: 5cf5680f3c3895349b25c3b50dfb2918, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7420,7 +7420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &874509954
 GameObject:
@@ -7793,6 +7793,7 @@ MonoBehaviour:
       elementalProtection: 00000000000000000000000000000000
       elementalBoosts: 00000000000000000000000000000000
   StartingWeapon: {fileID: 0}
+  Drops: []
   HitClip:
   - {fileID: 8300000, guid: 52bbf808b3d93fb4f861009f0d06498b, type: 3}
   - {fileID: 8300000, guid: a2b0c466fe3cda84da5a4a1f58ae2f07, type: 3}
@@ -8002,9 +8003,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5667712714323555573, guid: 12069a4bbbe66284f8a9a22eda310e5e,
         type: 3}
+      propertyPath: Drops.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667712714323555573, guid: 12069a4bbbe66284f8a9a22eda310e5e,
+        type: 3}
       propertyPath: Stats.baseStats.health
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5667712714323555573, guid: 12069a4bbbe66284f8a9a22eda310e5e,
+        type: 3}
+      propertyPath: Drops.Array.data[0]
+      value: 
+      objectReference: {fileID: 100000, guid: da1981c3ee8ea7e4186a753e15495628, type: 3}
+    - target: {fileID: 5667712714323555573, guid: 12069a4bbbe66284f8a9a22eda310e5e,
+        type: 3}
+      propertyPath: Drops.Array.data[1]
+      value: 
+      objectReference: {fileID: 100000, guid: 41ba2a6f1d128f94eba95e5213a81254, type: 3}
+    - target: {fileID: 5667712714323555573, guid: 12069a4bbbe66284f8a9a22eda310e5e,
+        type: 3}
+      propertyPath: Drops.Array.data[2]
+      value: 
+      objectReference: {fileID: 100000, guid: b332dc24cbb08144da2f112f82406700, type: 3}
+    - target: {fileID: 5667712714323555573, guid: 12069a4bbbe66284f8a9a22eda310e5e,
+        type: 3}
+      propertyPath: Drops.Array.data[3]
+      value: 
+      objectReference: {fileID: 100000, guid: 821158ae724ce854e920539f935295b8, type: 3}
+    - target: {fileID: 5667712714323555573, guid: 12069a4bbbe66284f8a9a22eda310e5e,
+        type: 3}
+      propertyPath: Drops.Array.data[4]
+      value: 
+      objectReference: {fileID: 100000, guid: f1c3f8e347f55f44e98e7ea73efac66e, type: 3}
+    - target: {fileID: 5667712714323555573, guid: 12069a4bbbe66284f8a9a22eda310e5e,
+        type: 3}
+      propertyPath: Drops.Array.data[5]
+      value: 
+      objectReference: {fileID: 100000, guid: ab34fd65b601dab41915f4e874408d28, type: 3}
     - target: {fileID: 6117080637132129562, guid: 12069a4bbbe66284f8a9a22eda310e5e,
         type: 3}
       propertyPath: m_Layer
@@ -8647,7 +8683,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 42.085003, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17889,6 +17925,7 @@ MonoBehaviour:
       elementalProtection: 00000000000000000000000000000000
       elementalBoosts: 00000000000000000000000000000000
   StartingWeapon: {fileID: 0}
+  Drops: []
   HitClip: []
 --- !u!114 &1762964212
 MonoBehaviour:
@@ -25199,6 +25236,7 @@ MonoBehaviour:
       elementalProtection: 00000000000000000000000000000000
       elementalBoosts: 00000000000000000000000000000000
   StartingWeapon: {fileID: 0}
+  Drops: []
   HitClip: []
 --- !u!114 &2145648730
 MonoBehaviour:

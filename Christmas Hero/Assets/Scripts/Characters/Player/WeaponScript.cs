@@ -26,12 +26,9 @@ namespace CreatorKitCodeInternal
                 if (timer <= 0.0f)
                 {
                     done = true;
+                    timer = 1.1f;
                     Destroy(snowball.gameObject);
                 }
-            }
-            else
-            {
-                timer = 1.1f;
             }
         }
         private void OnCollisionEnter(Collision collision)
