@@ -12,7 +12,9 @@ public class RiddleOnClick : MonoBehaviour
 
     private GameObject hero;
     private Canvas canvas;
+    private Collider present;
 
+    private bool giftPressed;
     private bool buttonPressed;
     private bool riddleToggle; //Replacing bigRiddle and cornerRiddle. true:big, false:corner
 
@@ -23,14 +25,26 @@ public class RiddleOnClick : MonoBehaviour
     {
         hero = GameObject.Find("SantaCharacter");
         buttonPressed = false;
+        giftPressed = false;
     }
 
     private void Update()
     {
+        if(giftPressed) {
+            float dist = Vector3.Distance(hero.transform.position, present.transform.position);
+            if(dist <= 2) {
+                canvas = present.GetComponent<PresentScript>().getRiddleCanvas();
+                giftPressed = false;
+                StartCoroutine(waitOneSec());
+                hero.GetComponent<Hero>().activateCarrying();
+                present.GetComponent<PresentScript>().pickup();
+                return;
+            }
+        }
         if(Input.GetMouseButtonUp(0)){
             buttonPressed = false;
         }
-        if (Input.GetMouseButton(0) && !buttonPressed && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !buttonPressed && !EventSystem.current.IsPointerOverGameObject())
         {
             buttonPressed = true;
             RaycastHit hit;
@@ -38,7 +52,12 @@ public class RiddleOnClick : MonoBehaviour
             if (Physics.Raycast(ray, out hit, rayLength, giftLayermask)) {
                 if(hit.collider.tag == "Present") {
                     float dist = Vector3.Distance(hero.transform.position, hit.collider.transform.position);
-                    if(dist > 2) return;
+                    if(dist > 2 && !hero.GetComponent<Hero>().carrying()) {
+                        giftPressed = true;
+                        present = hit.collider;
+                        return;
+                    }
+                    giftPressed = false;
                     canvas = hit.collider.GetComponent<PresentScript>().getRiddleCanvas();
                     if(hero.GetComponent<Hero>().carrying()){
                         hit.collider.GetComponent<PresentScript>().drop();
@@ -51,10 +70,19 @@ public class RiddleOnClick : MonoBehaviour
                         hit.collider.GetComponent<PresentScript>().pickup();
                     }
                 }
+            } else {
+                giftPressed = false;
+            }
+        } else if(Input.GetMouseButtonDown(0)) {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (!Physics.Raycast(ray, out hit, rayLength, giftLayermask)) {
+                giftPressed = false;
             }
         }
-        if(Input.GetMouseButton(0) && !buttonPressed)
-        {
+        if(Input.GetMouseButtonDown(0) && !buttonPressed && EventSystem.current.IsPointerOverGameObject())
+        { 
+            giftPressed = false;
             buttonPressed = true;
             if (riddleToggle)
                 minimizeRiddle();
