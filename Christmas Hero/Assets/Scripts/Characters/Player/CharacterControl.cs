@@ -172,6 +172,7 @@ namespace CreatorKitCodeInternal
             if (m_CharacterData.Stats.CurrentHealth == 0)
             {
                 // Debug.Log("<color=red>Load MenuScene</color>");
+                m_CharacterData = Data;
                 SceneManager.LoadSceneAsync(0);
 
                 // m_Animator.SetTrigger(m_FaintParamID);
