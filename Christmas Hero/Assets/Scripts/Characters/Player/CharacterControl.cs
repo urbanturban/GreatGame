@@ -171,16 +171,19 @@ namespace CreatorKitCodeInternal
             //(see CharacterData.OnDamage for an example)
             if (m_CharacterData.Stats.CurrentHealth == 0)
             {
-                m_Animator.SetTrigger(m_FaintParamID);
+                // Debug.Log("<color=red>Load MenuScene</color>");
+                SceneManager.LoadSceneAsync(0);
 
-                m_Agent.isStopped = true;
-                m_Agent.ResetPath();
-                m_IsKO = true;
-                m_KOTimer = 0.0f;
+                // m_Animator.SetTrigger(m_FaintParamID);
 
-                Data.Death();
+                // m_Agent.isStopped = true;
+                // m_Agent.ResetPath();
+                // m_IsKO = true;
+                // m_KOTimer = 0.0f;
 
-                m_CharacterAudio.Death(pos);
+                // Data.Death();
+
+                // m_CharacterAudio.Death(pos);
 
                 return;
             }
