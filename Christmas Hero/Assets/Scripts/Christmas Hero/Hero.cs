@@ -9,8 +9,11 @@ public class Hero : MonoBehaviour
     private bool isCarrying;
     private Animator animator;
 
+    private string currentZone;
+
     void Start()
     {
+        currentZone = "None";
         isCarrying = false;
         animator = GetComponentInChildren<Animator>();
     }
@@ -36,24 +39,22 @@ public class Hero : MonoBehaviour
     {
         return isCarrying;
     }
-/*
+
+    public string getCurrentZone() {
+        return currentZone;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Present"))
-        {
-            animator.SetBool("isCarrying", true);
-            other.GetComponent<PresentScript>().pickup();
-            isCarrying = true;
-        }
-        else if (other.CompareTag("House")){
-            animator.SetBool("isCarrying", false);
-            Debug.Log("Entered house area!");
-            if (isCarrying) {
-                GameObject.Find("presentHolder").GetComponentInChildren<PresentScript>().drop();
-                Debug.Log("DROPPED PRESENT");
-            }
+        if (other.CompareTag("Sheep")){
+            currentZone = "Sheep";
         }
     }
-    */
+
+    private void OnTriggerExit(Collider other){
+        if(other.CompareTag("Sheep")){
+            currentZone = "None";
+        }
+    }
 
     }

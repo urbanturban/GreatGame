@@ -45,7 +45,7 @@ public class RiddleOnClick : MonoBehaviour
             buttonPressed = false;
         }
         if (Input.GetMouseButtonDown(0) && !buttonPressed && !EventSystem.current.IsPointerOverGameObject())
-        {
+        {   
             buttonPressed = true;
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -63,6 +63,10 @@ public class RiddleOnClick : MonoBehaviour
                         hit.collider.GetComponent<PresentScript>().drop();
                         hero.GetComponent<Hero>().deactivateCarrying();
                         canvas.GetComponent<Canvas>().enabled = false;
+                        if(hit.collider.GetComponent<PresentScript>().getDeliverInfo()
+                        == hero.GetComponent<Hero>().getCurrentZone()){
+                            Debug.Log("DELIEVERED GIFT CORRECTLY!");
+                        }
                     }
                     else {
                         StartCoroutine(waitOneSec());

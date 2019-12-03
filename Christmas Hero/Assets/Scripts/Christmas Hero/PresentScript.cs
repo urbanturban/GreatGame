@@ -12,6 +12,8 @@ public class PresentScript : MonoBehaviour
     public AudioClip[] PresentSFXClips;
     public SFXManager.Use UseType;
 
+    public string deliverTo;
+
     private Rigidbody rb;
 
     void Start()
@@ -30,8 +32,8 @@ public class PresentScript : MonoBehaviour
         return canvas;
     }
 
-    public void testPrint() {
-        Debug.Log("PRESENT FUNCTION CALLED!");
+    public string getDeliverInfo(){
+        return deliverTo;
     }
 
     public void pickup() {
