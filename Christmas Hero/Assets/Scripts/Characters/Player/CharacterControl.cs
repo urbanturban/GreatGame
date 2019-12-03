@@ -26,6 +26,8 @@ namespace CreatorKitCodeInternal
 
         private WeaponScript weaponScript;
 
+        private bool clickingCanvas;
+
         [Header("Public References")]
         public Transform weapon;
         public Transform hand;
@@ -88,6 +90,7 @@ namespace CreatorKitCodeInternal
         // Start is called before the first frame update
         void Start()
         {
+            clickingCanvas = false;
 
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
@@ -152,6 +155,10 @@ namespace CreatorKitCodeInternal
         // Update is called once per frame
         void Update()
         {
+            if(Input.GetMouseButtonUp(0) && clickingCanvas){
+                clickingCanvas = false;
+            }
+
             Vector3 pos = transform.position;
 
             if (m_IsKO)
@@ -171,16 +178,20 @@ namespace CreatorKitCodeInternal
             //(see CharacterData.OnDamage for an example)
             if (m_CharacterData.Stats.CurrentHealth == 0)
             {
-                m_Animator.SetTrigger(m_FaintParamID);
+                // Debug.Log("<color=red>Load MenuScene</color>");
+                m_CharacterData = Data;
+                SceneManager.LoadSceneAsync(0);
 
-                m_Agent.isStopped = true;
-                m_Agent.ResetPath();
-                m_IsKO = true;
-                m_KOTimer = 0.0f;
+                // m_Animator.SetTrigger(m_FaintParamID);
 
-                Data.Death();
+                // m_Agent.isStopped = true;
+                // m_Agent.ResetPath();
+                // m_IsKO = true;
+                // m_KOTimer = 0.0f;
 
-                m_CharacterAudio.Death(pos);
+                // Data.Death();
+
+                // m_CharacterAudio.Death(pos);
 
                 return;
             }
@@ -210,7 +221,9 @@ namespace CreatorKitCodeInternal
 
             if (Input.GetMouseButtonDown(0))
             { //if we click the mouse button, we clear any previously et targets
-
+                if(EventSystem.current.IsPointerOverGameObject() && !clickingCanvas){
+                    clickingCanvas = true;
+                }
                 if (m_CurrentState != State.ATTACKING)
                 {
                     m_CurrentTargetCharacterData = null;
@@ -228,7 +241,7 @@ namespace CreatorKitCodeInternal
                 //Raycast to find object currently under the mouse cursor
                 ObjectsRaycasts(screenRay);
 
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && !clickingCanvas)
                 {
                     if (m_TargetInteractable == null && m_CurrentTargetCharacterData == null)
                     {
