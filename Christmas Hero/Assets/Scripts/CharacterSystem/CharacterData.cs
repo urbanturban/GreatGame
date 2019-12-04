@@ -22,6 +22,8 @@ namespace CreatorKitCode
         public InventorySystem Inventory = new InventorySystem();
         public EquipmentSystem Equipment = new EquipmentSystem();
 
+        public GameObject[] Drops;
+
         public AudioClip[] HitClip;
 
         /// <summary>
@@ -39,6 +41,10 @@ namespace CreatorKitCode
         }
 
         float m_AttackCoolDown;
+
+        private float timer = 10.0f;
+        private bool death = false;
+        private GameObject shadow;
 
         public void Init()
         {
@@ -67,6 +73,21 @@ namespace CreatorKitCode
 
             if (m_AttackCoolDown > 0.0f)
                 m_AttackCoolDown -= Time.deltaTime;
+
+            if (death)
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0.0f)
+                {
+                    death = false;
+                    timer = 10.0f;
+                    shadow.SetActive(true);
+                    shadow.GetComponent<CharacterData>().Init();
+                    shadow.GetComponent<SimpleEnemyController>().Start();
+                    // transform.gameObject.SetActive(false);
+                    Destroy(transform.gameObject);
+                }
+            }
         }
 
         /// <summary>
@@ -111,7 +132,14 @@ namespace CreatorKitCode
         /// </summary>
         public void Death()
         {
+            shadow = Instantiate(transform.gameObject, transform.position, transform.rotation);
+            shadow.SetActive(false);
             Stats.Death();
+            int index = Random.Range(0, Drops.Length);
+            var Drop = Drops[index];
+            Drop.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f);
+            Instantiate(Drop, transform.position, transform.rotation);
+            death = true;
         }
 
         /// <summary>
