@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Present
   - House
-  - Sheep
+  - Undefined
+  - ChristmasDeco
   layers:
   - Default
   - TransparentFX

@@ -61,9 +61,7 @@ public class RiddleOnClick : MonoBehaviour
                     }
                     giftPressed = false;
                     canvas = hit.collider.GetComponent<PresentScript>().getRiddleCanvas();
-                    // Remove when working
-                    //GameObject.Find("Main Camera").GetComponent<GameStateHandler>().incrementDecor();
-
+                    
                     if(hero.GetComponent<Hero>().carrying()){
                         hit.collider.GetComponent<PresentScript>().drop();
                         hero.GetComponent<Hero>().deactivateCarrying();
@@ -72,6 +70,10 @@ public class RiddleOnClick : MonoBehaviour
                         == hero.GetComponent<Hero>().getCurrentZone()){
                             GameObject.Find("Main Camera").GetComponent<GameStateHandler>().incrementDecor();
                             Destroy(hit.collider.GetComponent<PresentScript>());
+                            Animator animator = GameObject.Find(hit.collider.GetComponent<PresentScript>().getDeliverInfo()).GetComponent<Animator>();
+                            if(animator != null){
+                                animator.SetBool("Delivered", true);
+                            }
                         }
                     }
                     else {
