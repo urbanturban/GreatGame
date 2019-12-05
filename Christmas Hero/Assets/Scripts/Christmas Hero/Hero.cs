@@ -46,15 +46,10 @@ public class Hero : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Sheep")){
-            currentZone = "Sheep";
-        }
+        currentZone = other.gameObject.tag;
     }
 
     private void OnTriggerExit(Collider other){
-        if(other.CompareTag("Sheep")){
             currentZone = "None";
-        }
     }
-
-    }
+}
