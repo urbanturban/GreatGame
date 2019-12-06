@@ -15,8 +15,8 @@ namespace CreatorKitCodeInternal
             ATTACKING
         }
 
-        public float Speed = 6.0f;
-        public float detectionRadius = 10.0f;
+        public float Speed = 1.0f;
+        public float detectionRadius = 9.0f;
 
         public AudioClip[] SpottedAudioClip;
 
