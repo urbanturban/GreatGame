@@ -8,6 +8,9 @@ TagManager:
   - House
   - Undefined
   - ChristmasDeco
+  - Sheep
+  - Rabbit
+  - Fox
   layers:
   - Default
   - TransparentFX
