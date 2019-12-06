@@ -235,7 +235,6 @@ namespace CreatorKitCodeInternal
                 }
             }
 
-
             if (!EventSystem.current.IsPointerOverGameObject() && m_CurrentState != State.ATTACKING)
             {
                 //Raycast to find object currently under the mouse cursor

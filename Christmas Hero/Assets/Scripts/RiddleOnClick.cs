@@ -13,6 +13,7 @@ public class RiddleOnClick : MonoBehaviour
     private GameObject hero;
     private Canvas canvas;
     private Collider present;
+    //private MonoBehaviour levelHandler;
 
     private bool giftPressed;
     private bool buttonPressed;
@@ -26,6 +27,7 @@ public class RiddleOnClick : MonoBehaviour
         hero = GameObject.Find("SantaCharacter");
         buttonPressed = false;
         giftPressed = false;
+        //levelHandler = GameObject.Find("Main Camera").GetComponent<GameStateHandler>();
     }
 
     private void Update()
@@ -45,7 +47,7 @@ public class RiddleOnClick : MonoBehaviour
             buttonPressed = false;
         }
         if (Input.GetMouseButtonDown(0) && !buttonPressed && !EventSystem.current.IsPointerOverGameObject())
-        {
+        {   
             buttonPressed = true;
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -59,10 +61,20 @@ public class RiddleOnClick : MonoBehaviour
                     }
                     giftPressed = false;
                     canvas = hit.collider.GetComponent<PresentScript>().getRiddleCanvas();
+                    
                     if(hero.GetComponent<Hero>().carrying()){
                         hit.collider.GetComponent<PresentScript>().drop();
                         hero.GetComponent<Hero>().deactivateCarrying();
                         canvas.GetComponent<Canvas>().enabled = false;
+                        if(hit.collider.GetComponent<PresentScript>().getDeliverInfo()
+                        == hero.GetComponent<Hero>().getCurrentZone()){
+                            GameObject.Find("Main Camera").GetComponent<GameStateHandler>().incrementDecor();
+                            Destroy(hit.collider.GetComponent<PresentScript>());
+                            Animator animator = GameObject.Find(hit.collider.GetComponent<PresentScript>().getDeliverInfo()).GetComponent<Animator>();
+                            if(animator != null){
+                                animator.SetBool("Delivered", true);
+                            }
+                        }
                     }
                     else {
                         StartCoroutine(waitOneSec());
