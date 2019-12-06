@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 46442828155586174}
   m_Layer: 10
   m_Name: Sheep
-  m_TagString: Untagged
+  m_TagString: Sheep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,15 +463,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2645513957326928221}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.591, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalRotation: {x: -0, y: 0.68155634, z: -0, w: 0.7317657}
+  m_LocalPosition: {x: -3.69, y: -0.62788963, z: -0.10752869}
+  m_LocalScale: {x: 0.25000006, y: 0.25, z: 0.25000006}
   m_Children:
   - {fileID: 3333670412930891968}
   - {fileID: 8693784453233114810}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 85.93101, z: 0}
 --- !u!95 &8964303957061887540
 Animator:
   serializedVersion: 3
@@ -499,11 +499,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2645513957326928221}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.261014, y: 4.209418, z: 5.9594774}
-  m_Center: {x: 0.038226604, y: 2.104709, z: 0.4797387}
+  m_Size: {x: 11.649268, y: 4.2094173, z: 19.174202}
+  m_Center: {x: -0.18136308, y: 2.1047087, z: 3.5117714}
 --- !u!82 &46442828155586174
 AudioSource:
   m_ObjectHideFlags: 0
@@ -516,7 +516,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1979823316528580422, guid: cc5ada824a21cfe44863cd25f9927f85,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: a5f50e4847fb138488d54a2bea12ff13, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
