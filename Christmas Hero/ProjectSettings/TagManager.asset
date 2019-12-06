@@ -8,6 +8,8 @@ TagManager:
   - House
   - Undefined
   - ChristmasDeco
+  - Sheep
+  - Emoticon
   layers:
   - Default
   - TransparentFX
