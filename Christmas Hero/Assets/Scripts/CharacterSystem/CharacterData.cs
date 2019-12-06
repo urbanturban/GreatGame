@@ -1,6 +1,7 @@
 ﻿using System;
 using CreatorKitCodeInternal;
 using UnityEngine;
+using TMPro;
 
 using Random = UnityEngine.Random;
 
@@ -45,6 +46,7 @@ namespace CreatorKitCode
         private float timer = 10.0f;
         private bool death = false;
         private GameObject shadow;
+        private int hateLevel = 0;
 
         public void Init()
         {
@@ -84,6 +86,39 @@ namespace CreatorKitCode
                     shadow.SetActive(true);
                     shadow.GetComponent<CharacterData>().Init();
                     shadow.GetComponent<SimpleEnemyController>().Start();
+                    if (hateLevel < 3)
+                    {
+                        hateLevel += 1;
+                    }
+                    else
+                    {
+                        hateLevel = 0;
+                    }
+                    shadow.GetComponent<CharacterData>().hateLevel = hateLevel;
+                    shadow.GetComponent<SimpleEnemyController>().Speed = 1.0f + hateLevel * 1.0f;
+                    shadow.GetComponent<SimpleEnemyController>().detectionRadius = 9.0f + hateLevel * 1.0f;
+                    foreach (Transform child in shadow.transform)
+                    {
+                        if (child.tag == "Emoticon")
+                        {
+                            TextMeshPro tmp = child.gameObject.GetComponent<TextMeshPro>();
+                            switch (shadow.GetComponent<CharacterData>().hateLevel)
+                            {
+                                case 1:
+                                    tmp.text = "<sprite=3>";
+                                    break;
+                                case 2:
+                                    tmp.text = "<sprite=3><sprite=3>";
+                                    break;
+                                case 3:
+                                    tmp.text = "<sprite=3><sprite=3><sprite=3>";
+                                    break;
+                                default:
+                                    tmp.text = "<sprite=10>";
+                                    break;
+                            }
+                        }
+                    }
                     // transform.gameObject.SetActive(false);
                     Destroy(transform.gameObject);
                 }
@@ -140,6 +175,14 @@ namespace CreatorKitCode
             Drop.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f);
             Instantiate(Drop, transform.position, transform.rotation);
             death = true;
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "Emoticon")
+                {
+                    TextMeshPro tmp = child.gameObject.GetComponent<TextMeshPro>();
+                    tmp.text = "";
+                }
+            }
         }
 
         /// <summary>

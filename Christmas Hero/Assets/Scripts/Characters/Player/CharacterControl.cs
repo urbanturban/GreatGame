@@ -8,6 +8,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace CreatorKitCodeInternal
 {
@@ -155,7 +156,8 @@ namespace CreatorKitCodeInternal
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetMouseButtonUp(0) && clickingCanvas){
+            if (Input.GetMouseButtonUp(0) && clickingCanvas)
+            {
                 clickingCanvas = false;
             }
 
@@ -221,7 +223,8 @@ namespace CreatorKitCodeInternal
 
             if (Input.GetMouseButtonDown(0))
             { //if we click the mouse button, we clear any previously et targets
-                if(EventSystem.current.IsPointerOverGameObject() && !clickingCanvas){
+                if (EventSystem.current.IsPointerOverGameObject() && !clickingCanvas)
+                {
                     clickingCanvas = true;
                 }
                 if (m_CurrentState != State.ATTACKING)
@@ -508,6 +511,16 @@ namespace CreatorKitCodeInternal
                 WeaponScript.m_CharacterData = m_CharacterData;
                 WeaponScript.m_CurrentTargetCharacterData = m_CurrentTargetCharacterData;
                 snowball.parent = null;
+
+                // emoticon
+                foreach (Transform child in transform)
+                {
+                    if (child.tag == "Emoticon")
+                    {
+                        TextMeshPro tmp = child.gameObject.GetComponent<TextMeshPro>();
+                        tmp.text = "<sprite=11>";
+                    }
+                }
 
                 // snowball.localPosition = weapon.localPosition;
 

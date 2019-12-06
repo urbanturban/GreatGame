@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CreatorKitCode;
+using TMPro;
 
 namespace CreatorKitCodeInternal
 {
@@ -28,6 +29,15 @@ namespace CreatorKitCodeInternal
                     done = true;
                     timer = 1.1f;
                     Destroy(snowball.gameObject);
+                    // emoticon
+                    foreach (Transform child in m_CharacterData.transform)
+                    {
+                        if (child.tag == "Emoticon")
+                        {
+                            TextMeshPro tmp = child.gameObject.GetComponent<TextMeshPro>();
+                            tmp.text = "<sprite=0>";
+                        }
+                    }
                 }
             }
         }
