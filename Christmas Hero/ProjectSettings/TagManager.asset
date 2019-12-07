@@ -4,11 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Present
-  - House
-  - Undefined
   - ChristmasDeco
+  - Rabbit
+  - Present
+  - Fox
   - Sheep
+  - House
   - Emoticon
   layers:
   - Default
@@ -20,14 +21,6 @@ TagManager:
   - 
   - 
   - Level
-  - Props
-  - Interactable
-  - Target
-  - PlayerCollisionOnly
-  - Player
-  - PlayerEquipment
-  - SelfIgnore
-  - PlayerCarry
   - 
   - 
   - 
@@ -42,7 +35,15 @@ TagManager:
   - 
   - 
   - 
-  - PostProcessing
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

@@ -74808,11 +74808,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1512544872460698192}
     m_Modifications:
-    - target: {fileID: 6590819629033940685, guid: 78dfdbe2631e29d438f42dda70db9870,
-        type: 3}
-      propertyPath: m_Name
-      value: CactusBossy
-      objectReference: {fileID: 0}
     - target: {fileID: 6590819629033940688, guid: 78dfdbe2631e29d438f42dda70db9870,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -74867,6 +74862,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590819629033940685, guid: 78dfdbe2631e29d438f42dda70db9870,
+        type: 3}
+      propertyPath: m_Name
+      value: CactusBossy
       objectReference: {fileID: 0}
     - target: {fileID: 7646243175809405097, guid: 78dfdbe2631e29d438f42dda70db9870,
         type: 3}
