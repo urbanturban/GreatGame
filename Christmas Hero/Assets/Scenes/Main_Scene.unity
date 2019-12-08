@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 112000000, guid: d5f7603179b8d7f4e9ec598e75b2a9b4,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -229,6 +229,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643924288357590715, guid: c2d0e0dc71d2f604496a60ddedac9f40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4356722114069963081, guid: c2d0e0dc71d2f604496a60ddedac9f40,
         type: 3}
@@ -620,6 +625,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087027799533979282, guid: 43b2adc097d03474e96892f29acbc581,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2940130841934023818, guid: 43b2adc097d03474e96892f29acbc581,
         type: 3}
@@ -6647,7 +6657,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 0.9528302, g: 0.92368215, b: 0.8719295, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -7057,6 +7067,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a41fccda3d34045bb5d53538eb79f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rateOverTime: 5
+  rateOverDist: 0
 --- !u!114 &1512544872593846669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25748,8 +25760,8 @@ GameObject:
   m_Name: Mesh194
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &2212741240925902121
 GameObject:
@@ -25934,8 +25946,8 @@ GameObject:
   m_Name: Mesh187
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &2212981185139465281
 GameObject:
@@ -25970,8 +25982,8 @@ GameObject:
   m_Name: Mesh190
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &2213055643040484041
 GameObject:
@@ -25988,8 +26000,8 @@ GameObject:
   m_Name: Mesh189
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &2213102058268808567
 GameObject:
@@ -26244,8 +26256,8 @@ GameObject:
   m_Name: Mesh184
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &2213416493568764275
 GameObject:
