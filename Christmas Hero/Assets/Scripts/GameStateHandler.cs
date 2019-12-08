@@ -6,6 +6,7 @@ public class GameStateHandler : MonoBehaviour
 {
 
     private GameObject decorations;
+    private GameObject presents;
 
     private Light dLight; //directional light over entire scene
 
@@ -20,9 +21,19 @@ public class GameStateHandler : MonoBehaviour
     void Start()
     {
         decorations = GameObject.Find("ChristmasDeco");
+        presents = GameObject.Find("Presents");
         foreach (Transform child in decorations.transform)
             child.gameObject.SetActive(false);
 
+        // De-activate all presents except for the first
+        bool first = true;
+        foreach (Transform child in presents.transform) {
+            if(!first){
+                child.gameObject.SetActive(false);
+            } else {
+                first = false;
+            }
+        }
         dLight = GameObject.Find("Directional Light").GetComponent<Light>();
         snowSystem = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ParticleSystem>();
         if (xmasBGM == null)
@@ -46,18 +57,27 @@ public class GameStateHandler : MonoBehaviour
         lightIntensity += 0.5f;
         rateOverTime += 10f;
         rateOverDist += 0.5f;
-        xmasBGM.nextTrack();
+        //xmasBGM.nextTrack(); <- this caused big error
 
         Transform previousChild = null;
         foreach (Transform child in decorations.transform) {
             if(child.gameObject.activeSelf && previousChild != null && !previousChild.gameObject.activeSelf) {
                 previousChild.gameObject.SetActive(true);
-                return;
+                break;
             }
             previousChild = child;
         }
         if(previousChild != null)
             previousChild.gameObject.SetActive(true);
+        Debug.Log("Incrementing decor!");
+        foreach (Transform child in presents.transform){
+            print("In presents loop");
+            if(!child.gameObject.activeSelf){
+                print("Incrementing present!");
+                child.gameObject.SetActive(true);
+                break;
+            }
+        }
         //decorations.SetActive(true);
 
 
