@@ -57,7 +57,7 @@ public class GameStateHandler : MonoBehaviour
         lightIntensity += 0.5f;
         rateOverTime += 10f;
         rateOverDist += 0.5f;
-        xmasBGM.nextTrack();
+        //xmasBGM.nextTrack(); <- this caused big error
 
         Transform previousChild = null;
         foreach (Transform child in decorations.transform) {
@@ -69,9 +69,11 @@ public class GameStateHandler : MonoBehaviour
         }
         if(previousChild != null)
             previousChild.gameObject.SetActive(true);
-
+        Debug.Log("Incrementing decor!");
         foreach (Transform child in presents.transform){
+            print("In presents loop");
             if(!child.gameObject.activeSelf){
+                print("Incrementing present!");
                 child.gameObject.SetActive(true);
                 break;
             }
