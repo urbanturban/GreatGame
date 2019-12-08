@@ -8,12 +8,13 @@ public class GameStateHandler : MonoBehaviour
     private GameObject decorations;
 
     private Light dLight; //directional light over entire scene
+
     private float lightIntensity = 0.25f;
     private ParticleSystem snowSystem;
-    [SerializeField]
     private float rateOverTime = 5f;
-    [SerializeField]
     private float rateOverDist = 0f;
+    public ChristmasBGM xmasBGM;  
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,10 @@ public class GameStateHandler : MonoBehaviour
 
         dLight = GameObject.Find("Directional Light").GetComponent<Light>();
         snowSystem = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ParticleSystem>();
+        if (xmasBGM == null)
+        {
+            xmasBGM = GameObject.FindGameObjectWithTag("BGM").GetComponent<ChristmasBGM>();
+        }
     }
 
     // Update is called once per frame
@@ -41,6 +46,7 @@ public class GameStateHandler : MonoBehaviour
         lightIntensity += 0.5f;
         rateOverTime += 10f;
         rateOverDist += 0.5f;
+        xmasBGM.nextTrack();
 
         Transform previousChild = null;
         foreach (Transform child in decorations.transform) {
@@ -55,10 +61,5 @@ public class GameStateHandler : MonoBehaviour
         //decorations.SetActive(true);
 
 
-    }
-
-    void OnGUI()
-    {
-        rateOverTime = GUI.HorizontalSlider(new Rect(25, 45, 100, 30), rateOverTime, 5.0f, 200.0f);
     }
 }
