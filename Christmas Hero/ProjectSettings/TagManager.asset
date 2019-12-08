@@ -11,6 +11,7 @@ TagManager:
   - Sheep
   - House
   - Emoticon
+  - Riddle
   layers:
   - Default
   - TransparentFX

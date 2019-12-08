@@ -6,6 +6,7 @@ public class GameStateHandler : MonoBehaviour
 {
 
     private GameObject decorations;
+    private GameObject presents;
 
     private Light dLight; //directional light over entire scene
     private float lightIntensity = 0.25f;
@@ -19,9 +20,19 @@ public class GameStateHandler : MonoBehaviour
     void Start()
     {
         decorations = GameObject.Find("ChristmasDeco");
+        presents = GameObject.Find("Presents");
         foreach (Transform child in decorations.transform)
             child.gameObject.SetActive(false);
 
+        // De-activate all presents except for the first
+        bool first = true;
+        foreach (Transform child in presents.transform) {
+            if(!first){
+                child.gameObject.SetActive(false);
+            } else {
+                first = false;
+            }
+        }
         dLight = GameObject.Find("Directional Light").GetComponent<Light>();
         snowSystem = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ParticleSystem>();
     }
@@ -46,12 +57,19 @@ public class GameStateHandler : MonoBehaviour
         foreach (Transform child in decorations.transform) {
             if(child.gameObject.activeSelf && previousChild != null && !previousChild.gameObject.activeSelf) {
                 previousChild.gameObject.SetActive(true);
-                return;
+                break;
             }
             previousChild = child;
         }
         if(previousChild != null)
             previousChild.gameObject.SetActive(true);
+
+        foreach (Transform child in presents.transform){
+            if(!child.gameObject.activeSelf){
+                child.gameObject.SetActive(true);
+                break;
+            }
+        }
         //decorations.SetActive(true);
 
 

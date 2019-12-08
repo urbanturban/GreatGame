@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 using CreatorKitCode;
+using System.Collections.Generic;
 
 public class RiddleOnClick : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class RiddleOnClick : MonoBehaviour
     public float rayLength;
     public LayerMask giftLayermask;
     public LayerMask uiLayer;
-
+    
     private GameObject hero;
     private Canvas canvas;
     private Collider present;
@@ -94,11 +95,24 @@ public class RiddleOnClick : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0) && !buttonPressed && EventSystem.current.IsPointerOverGameObject())
         { 
-            giftPressed = false;
-            buttonPressed = true;
-            if (riddleToggle)
-                minimizeRiddle();
-            else maximizeRiddle();    
+            PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+            pointerEventData.position = Input.mousePosition;
+
+            List<RaycastResult> raycastResultList = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerEventData, raycastResultList);
+            for(int i = 0; i < raycastResultList.Count; i++){
+                if(!(raycastResultList[i].gameObject.tag == "Riddle")){
+                      raycastResultList.RemoveAt(i);
+                      i--;
+                }
+            }
+            if(raycastResultList.Count > 0) {
+                giftPressed = false;
+                buttonPressed = true;
+                if (riddleToggle)
+                    minimizeRiddle();
+                else maximizeRiddle();  
+            }
         }
     }
     private void minimizeRiddle()
