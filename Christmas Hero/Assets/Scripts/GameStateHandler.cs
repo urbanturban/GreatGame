@@ -7,6 +7,7 @@ public class GameStateHandler : MonoBehaviour
 
     private GameObject decorations;
     private GameObject presents;
+    public GameObject finish;
 
     private Light dLight; //directional light over entire scene
 
@@ -51,8 +52,16 @@ public class GameStateHandler : MonoBehaviour
         dLight.intensity = lightIntensity;
     }
 
-
+    private int level = 0;
     public void incrementDecor() {
+
+        
+        level = level + 1;
+        if (level == 3)
+        {
+            finish.SetActive(true);
+            Debug.Log("Finish");
+        }
         //Light and SnowParticle System incrementation
         lightIntensity += 0.5f;
         rateOverTime += 10f;
