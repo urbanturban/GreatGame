@@ -6,6 +6,7 @@ public class GameStateHandler : MonoBehaviour
 {
 
     private GameObject decorations;
+    private Light dLight; //directional light over entire scene
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +14,9 @@ public class GameStateHandler : MonoBehaviour
         decorations = GameObject.Find("ChristmasDeco");
         foreach (Transform child in decorations.transform)
             child.gameObject.SetActive(false);
+
+        dLight = GameObject.Find("Directional Light").GetComponent<Light>();
+
     }
 
     // Update is called once per frame
@@ -34,5 +38,6 @@ public class GameStateHandler : MonoBehaviour
         if(previousChild != null)
             previousChild.gameObject.SetActive(true);
         //decorations.SetActive(true);
+        dLight.intensity += 0.5f;
     }
 }
