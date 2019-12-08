@@ -19,6 +19,7 @@ public class ChristmasBGM : MonoBehaviour
         trackIndex++;
         bgm.Stop();
         bgm.clip = audioClips[trackIndex];
+        bgm.loop = true;
         bgm.PlayOneShot(bgm.clip);
     }
 }
