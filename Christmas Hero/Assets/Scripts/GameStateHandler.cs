@@ -7,6 +7,7 @@ public class GameStateHandler : MonoBehaviour
 
     private GameObject decorations;
     private GameObject presents;
+    private GameObject finish;
 
     private Light dLight; //directional light over entire scene
 
@@ -22,6 +23,7 @@ public class GameStateHandler : MonoBehaviour
     {
         decorations = GameObject.Find("ChristmasDeco");
         presents = GameObject.Find("Presents");
+        finish = GameObject.Find("Finish_Canvas");
         foreach (Transform child in decorations.transform)
             child.gameObject.SetActive(false);
 
@@ -34,6 +36,7 @@ public class GameStateHandler : MonoBehaviour
                 first = false;
             }
         }
+        finish.SetActive(false);
         dLight = GameObject.Find("Directional Light").GetComponent<Light>();
         snowSystem = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ParticleSystem>();
         if (xmasBGM == null)
@@ -51,8 +54,16 @@ public class GameStateHandler : MonoBehaviour
         dLight.intensity = lightIntensity;
     }
 
-
+    private int level = 0;
     public void incrementDecor() {
+
+        
+        level = level + 1;
+        if (level == 3)
+        {
+            finish.SetActive(true);
+            Debug.Log("Finish");
+        }
         //Light and SnowParticle System incrementation
         lightIntensity += 0.5f;
         rateOverTime += 10f;
