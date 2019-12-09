@@ -66,7 +66,7 @@ public class GameStateHandler : MonoBehaviour
         lightIntensity += 0.5f;
         rateOverTime += 10f;
         rateOverDist += 0.5f;
-        xmasBGM.nextTrack();
+        xmasBGM.incrementMusic();
 
         Transform previousChild = null;
         foreach (Transform child in decorations.transform) {
@@ -88,6 +88,7 @@ public class GameStateHandler : MonoBehaviour
             }
         }
         //decorations.SetActive(true);
+
 
 
     }

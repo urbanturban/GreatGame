@@ -10,21 +10,28 @@ public class RiddleOnClick : MonoBehaviour
     public float rayLength;
     public LayerMask giftLayermask;
     public LayerMask uiLayer;
+    public float notifyPeriod;
     
     private GameObject hero;
     private Canvas canvas;
     private Collider present;
+    private GameObject giftNotification;
     //private MonoBehaviour levelHandler;
 
     private bool giftPressed;
     private bool buttonPressed;
     private bool riddleToggle; //Replacing bigRiddle and cornerRiddle. true:big, false:corner
+    private float nextActionTime = -1.0f;
+    private bool showingNotification;
 
     public AudioClip[] RiddleSFXClips;
     public SFXManager.Use UseType;
 
     void Start()
     {
+        giftNotification = GameObject.Find("PresentNotification");
+        giftNotification.gameObject.SetActive(false);
+        showingNotification = false;
         hero = GameObject.Find("SantaCharacter");
         buttonPressed = false;
         giftPressed = false;
@@ -33,9 +40,17 @@ public class RiddleOnClick : MonoBehaviour
 
     private void Update()
     {
+        if(showingNotification){
+            giftNotification.gameObject.transform.position = hero.transform.position + new Vector3(4.0f, 4.0f, 0.0f);
+        }
+        if ((Time.time > nextActionTime) && (nextActionTime > 0.0f)) {
+            nextActionTime = Time.time + notifyPeriod;
+            StartCoroutine(showNotification());
+        }
         if(giftPressed) {
             float dist = Vector3.Distance(hero.transform.position, present.transform.position);
             if(dist <= 2) {
+                nextActionTime = Time.time + notifyPeriod;
                 canvas = present.GetComponent<PresentScript>().getRiddleCanvas();
                 giftPressed = false;
                 StartCoroutine(waitOneSec());
@@ -64,6 +79,9 @@ public class RiddleOnClick : MonoBehaviour
                     canvas = hit.collider.GetComponent<PresentScript>().getRiddleCanvas();
                     
                     if(hero.GetComponent<Hero>().carrying()){
+                        nextActionTime = -1.0f;
+                        giftNotification.gameObject.SetActive(false);
+                        showingNotification = false;
                         hit.collider.GetComponent<PresentScript>().drop();
                         hero.GetComponent<Hero>().deactivateCarrying();
                         canvas.GetComponent<Canvas>().enabled = false;
@@ -78,6 +96,7 @@ public class RiddleOnClick : MonoBehaviour
                         }
                     }
                     else {
+                        nextActionTime = Time.time + notifyPeriod;
                         StartCoroutine(waitOneSec());
                         hero.GetComponent<Hero>().activateCarrying();
                         hit.collider.GetComponent<PresentScript>().pickup();
@@ -148,5 +167,13 @@ public class RiddleOnClick : MonoBehaviour
         yield return new WaitForSeconds(1);
         canvas.GetComponent<Canvas>().enabled = true;
         maximizeRiddle();
+    }
+
+    private IEnumerator showNotification(){
+        showingNotification = true;
+        giftNotification.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5);
+        giftNotification.gameObject.SetActive(false);
+        showingNotification = false;
     }
 }
