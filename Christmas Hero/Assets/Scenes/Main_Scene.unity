@@ -8628,7 +8628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a41fccda3d34045bb5d53538eb79f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finish: {fileID: 0}
   xmasBGM: {fileID: 0}
 --- !u!114 &1512544872593846669
 MonoBehaviour:
