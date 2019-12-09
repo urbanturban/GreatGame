@@ -56,7 +56,6 @@ public class GameStateHandler : MonoBehaviour
 
     private int level = 0;
     public void incrementDecor() {
-
         
         level = level + 1;
         if (level == 3)
@@ -89,9 +88,5 @@ public class GameStateHandler : MonoBehaviour
                 break;
             }
         }
-        //decorations.SetActive(true);
-
-
-
     }
 }
