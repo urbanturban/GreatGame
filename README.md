@@ -15,12 +15,8 @@ A very short-demo developed as part of a group project in Game Design at KTH.
 
 Project Members who all contributed with their unique skills:
 
-Akash Menon
-
-Hedvig Fahlstedt
-
-Jian Gu
-
-Thelma Svenns
-
-Timmy Joachim Nielsen
+- Akash Menon
+- Hedvig Fahlstedt
+- Jian Gu
+- Thelma Svenns
+- Timmy Joachim Nielsen
