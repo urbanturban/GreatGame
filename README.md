@@ -1,6 +1,6 @@
 # Christmas Hero
 [Trailer](https://vimeo.com/378384448) 
-| [First Pitch Presentation](https://docs.google.com/presentation/d/19qZ0dPSdiG5nOxb1LAT0HWT35fOQRbE4AmOApEKAWp4/edit?usp=sharing)
+| [First Pitch Presentation](https://docs.google.com/presentation/d/19TW9P9oIZz-VuwYaM5-NsAH3-TLUCoumstMm0LQ7Lts/edit?usp=sharing)
 | [Final Presentation](https://docs.google.com/presentation/d/19qZ0dPSdiG5nOxb1LAT0HWT35fOQRbE4AmOApEKAWp4/edit#slide=id.g35ed75ccf_015)
 | [Webpage](https://christmashero.netlify.app/)
 
